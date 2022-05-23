@@ -1,4 +1,4 @@
-PLAYER,Team,Experience,Minutes,Pace,PTS,AST,DREB,OREB,BLK,STL,TOV,FGA,FTA,FG3A,RimFGA,PF,date_of_projection
+PLAYER,Team,Experience,daily_Minutes,daily_Pace,daily_PTS,daily_AST,daily_DREB,daily_OREB,daily_BLK,daily_STL,daily_TOV,daily_FGA,daily_FTA,daily_FG3A,daily_RimFGA,daily_PF,daily_date_of_projection
 Nikola Jokic,Denver Nuggets,Vet,38.3,98.5,31.3,7.6,12.5,3.3,1.1,1.6,4.3,21.2,8.2,3.5,6.2,3.6,2022-05-03
 Luka Doncic,Dallas Mavericks,Vet,38.9,94,30.2,8.5,9,0.9,0.7,1.2,4.2,23.2,9.1,10.3,3.9,2.8,2022-05-03
 Donovan Mitchell,Utah Jazz,Vet,38.7,95.5,29,6,4,0.9,0.3,1.3,3.3,22.4,6.4,9.4,4,2.9,2022-05-03
