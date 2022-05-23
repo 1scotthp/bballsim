@@ -12,6 +12,7 @@ def run():
     spotup = pd.read_csv("data/spotup.csv")
     putback = pd.read_csv("data/putbacks.csv")
     postup = pd.read_csv("data/postup.csv")
+    daily = pd.read_csv("data/daily.csv")
 
     # res = darko_data.merge(transition,on=['PLAYER', 'Team'],how='outer')
     res = transition.merge(misc,on=['PLAYER', 'TEAM'],how='outer')
@@ -23,7 +24,9 @@ def run():
     res = res.merge(postup, on=['PLAYER', 'TEAM'], how="outer")
     
 
+    res = daily.merge(res, on='PLAYER')
     res = darko_data.merge(res, on='PLAYER')
+
     res.to_csv("master.csv")
 
     # darko_data.to_csv("master.csv")
