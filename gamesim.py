@@ -3,11 +3,17 @@
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
+from cmath import nan
 from random import randrange
+
 import numpy
 import pandas as pd
 
 TRANSITION_MAX = 6
+
+
+## need a schema for possession out come returns
+
 
 
 # class Player:
@@ -164,6 +170,17 @@ def transition_possession(home_on_court, away_on_court, timeLeft, possession):
         offensive_players = away_on_court
 
     shooter = sim_which_player_takes_shot(offensive_players)
+    
+    offensive_players = offensive_players.to_dict()
+    for i in offensive_players.keys():
+        print(offensive_players[i])
+
+    
+
+
+    # for prob in offensive_players["FG2%"]:
+    #     print(a[:-1])
+    
     if random_chance(50):
         # print(shooter, " SHOOTS, HE SCORES")
         return "2", shooter
@@ -230,14 +247,6 @@ def get_real_players(team1, team2):
             t2 = t2.append(index)
     return t1, t2
 
-# interlaken 190
-# EU PASS 7 day 274
-#
-
-
-
-
-
 
     # get a shot off
 
@@ -275,81 +284,105 @@ if __name__ == '__main__':
     #     [p10.name, 0, 0, 0, 0, 0],
     # ])
 
+    teams = ["Milwaukee Bucks", "Phoenix Suns", "Dallas Mavericks", "Golden State Warriors", "Miami Heat", "Boston Celtics", "Utah Jazz", "Memphis Grizzlies"]
+
+    def generate_matchups(n):
+        matchups = []
+        while n > 0:
+            matchups.append([teams[randrange(8)], teams[randrange(8)]])
+            n-=1
+        return matchups
+
+    games = generate_matchups(10)
 
     
 
+    for home_name, away_name in games:
 
-    home, away = get_real_players("Milwaukee Bucks", "Phoenix Suns")
-    box_score = away.append(home)
-  
-    box_score.insert(2, "PTS", [0]*33, True)
-    box_score.insert(3, "SEC", [0]*33, True)
-    box_score.insert(2, "TO", [0]*33, True)
-    home.insert(2, "PTS", [0]*17, True)
-    home.insert(2, "TO", [0]*17, True)
-    away.insert(2, "PTS", [0]*16, True)
-    away.insert(2, "TO", [0]*16, True)
+        home, away= get_real_players(home_name, away_name)
+
+        box_score = pd.concat([home, away])
+
+        print("DUPED", box_score[box_score.index.duplicated()])
     
+        box_score.insert(0, "PTS", 0, True)
+        box_score.insert(14, "SEC", 0, True)
+        box_score.insert(0, "TO", 0, True)
+        home.insert(0, "PTS", 0, True)
+        home.insert(0, "TO", 0, True)
+        away.insert(0, "PTS", 0, True)
+        away.insert(0, "TO", 0, True)
 
-    home_on_court = home.head(5)
-    away_on_court = away.head(5)
+        second_dict = {}
 
-    timeLeft = 600
-    quarter = 0
-
-    while quarter < 4:
-        while timeLeft > 0:
-            # if random_chance(50):
-            #     home_on_court = damn_should_i_sub(home)
-            #     away_on_court = damn_should_i_sub(away)
-
-            outcome, player, possessionLength = start_possession(home_on_court,away_on_court, timeLeft, homeScore, awayScore, possession, "rebound")
-            timeLeft -= possessionLength
-
-            for player in home_on_court["Player"].to_numpy():
-                box_score.loc[box_score["Player"] == player, "SEC"] += possessionLength
-
-            for player in away_on_court["Player"].to_numpy():
-                box_score.loc[box_score["Player"] == player, "SEC"] += possessionLength
-            
-
-
-            if outcome == "turnover":
-                # increment the box score
-                if possession:
-                    home.loc[box_score["Player"] == player, 'TO'] += 1
-                else:
-                    away.loc[box_score["Player"] == player, 'TO'] += 1
-                box_score.loc[box_score["Player"] == player, 'TO'] += 1
-            elif outcome == "2":
-                if possession:
-                    homeScore += 2
-                else:
-                    awayScore += 2
-                box_score.loc[box_score["Player"] == player, 'PTS'] += 2
-            elif outcome == "3":
-                if possession:
-                    homeScore += 3
-                else:
-                    awayScore += 3
-                box_score.loc[box_score["Player"] == player, 'PTS'] += 3
-
-            possession = not possession
+        for name in box_score["Player"]:
+            second_dict[name] = 0
         
-        quarter+=1
+
+        home_on_court = home.head(5)
+        away_on_court = away.head(5)
+
         timeLeft = 600
-        print("HOME: ", homeScore, "AWAY: ", awayScore)
-        print("END ", quarter, " QUARTER")
+        quarter = 0
 
-    
-    # box_score.insert(2, "MIN", round(box_score["SEC"] / 60, 0), True)
-    print(box_score)
+        while quarter < 4:
+            while timeLeft > 0:
+                outcome, player, possessionLength = start_possession(home_on_court,away_on_court, timeLeft, homeScore, awayScore, possession, "rebound")
+                timeLeft -= possessionLength
+
+                for name in home_on_court["Player"]:
+                    second_dict[name] += possessionLength
+
+                for name in away_on_court["Player"]:
+                    second_dict[name] += possessionLength
 
 
-    box_score.to_csv("box.csv")
+                if outcome == "turnover":
+                    # increment the box score
+                    if possession:
+                        home.loc[box_score["Player"] == player, 'TO'] += 1
+                    else:
+                        away.loc[box_score["Player"] == player, 'TO'] += 1
+                    box_score.loc[box_score["Player"] == player, 'TO'] += 1
+                elif outcome == "2":
+                    if possession:
+                        homeScore += 2
+                    else:
+                        awayScore += 2
+                    box_score.loc[box_score["Player"] == player, 'PTS'] += 2
+                elif outcome == "3":
+                    if possession:
+                        homeScore += 3
+                    else:
+                        awayScore += 3
+                    box_score.loc[box_score["Player"] == player, 'PTS'] += 3
+
+                possession = not possession
+                if random_chance(50):
+                    home_on_court = damn_should_i_sub(home)
+                    away_on_court = damn_should_i_sub(away)
+            
+            quarter+=1
+            timeLeft = 600
+
+        # box_score.insert(0, "MIN", 0, True)
+
+        for name in box_score["Player"]:
+            box_score.loc[box_score["Player"] == name, "MIN"] = round(second_dict[name] / 60)
+            
+  
+        print(box_score)
+        box_score.to_csv(f"box_scores/{home_name} vs {away_name}.csv")
+
+        
+        home = home.iloc[0:0]
+        away = away.iloc[0:0]
+        box_score = box_score.iloc[0:0]
 
 
 
+
+##TODO ADD THREES
 
 
      
