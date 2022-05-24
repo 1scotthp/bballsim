@@ -2,61 +2,89 @@
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-from ast import Constant
+
 from random import randrange
+import numpy
 import pandas as pd
 
 TRANSITION_MAX = 6
 
 
-class Player:
-    def __init__(self, name, age, blk, stl, twoFGp, twoFGrate, threeFGp, threeFGrate, to):
-        self.name = name
-        self.age = age
-        self.blk = blk
-        self.stl = stl
-        self.to = to
-        self.twoFGp = twoFGp
-        self.twoFGrate = twoFGrate
-        self.threeFGp = threeFGp
-        self.threeFGrate = threeFGrate
+# class Player:
+#     def __init__(self, name, age, blk, stl, twoFGp, twoFGrate, threeFGp, threeFGrate, to):
+#         self.name = name
+#         self.age = age
+#         self.blk = blk
+#         self.stl = stl
+#         self.to = to
+#         self.twoFGp = twoFGp
+#         self.twoFGrate = twoFGrate
+#         self.threeFGp = threeFGp
+#         self.threeFGrate = threeFGrate
 
 
-p1 = Player("JOHN", 30, 2, 2, 40, 20, 30, 20, 10)
-p2 = Player("RICK", 30, 2, 2, 40, 20, 30, 20, 10)
-p3 = Player("BOB", 30, 2, 2, 40, 20, 30, 20, 10)
-p4 = Player("JORDAN", 30, 2, 2, 40, 20, 30, 20, 10)
-p5 = Player("YOU", 30, 2, 2, 40, 20, 30, 20, 10)
-p6 = Player("KC", 30, 2, 2, 40, 20, 30, 20, 10)
-p7 = Player("NATE", 30, 2, 2, 40, 20, 30, 20, 10)
-p8 = Player("SCOTT", 30, 2, 2, 40, 20, 30, 20, 10)
-p9 = Player("ANTONIO", 30, 2, 2, 40, 20, 30, 20, 10)
-p10 = Player("VIC", 30, 2, 2, 40, 20, 30, 20, 10)
+# p1 = Player("JOHN", 30, 2, 2, 40, 20, 30, 20, 10)
+# p2 = Player("RICK", 30, 2, 2, 40, 20, 30, 20, 10)
+# p3 = Player("BOB", 30, 2, 2, 40, 20, 30, 20, 10)
+# p4 = Player("JORDAN", 30, 2, 2, 40, 20, 30, 20, 10)
+# p5 = Player("YOU", 30, 2, 2, 40, 20, 30, 20, 10)
+# p6 = Player("KC", 30, 2, 2, 40, 20, 30, 20, 10)
+# p7 = Player("NATE", 30, 2, 2, 40, 20, 30, 20, 10)
+# p8 = Player("SCOTT", 30, 2, 2, 40, 20, 30, 20, 10)
+# p9 = Player("ANTONIO", 30, 2, 2, 40, 20, 30, 20, 10)
+# p10 = Player("VIC", 30, 2, 2, 40, 20, 30, 20, 10)
 
 
 def random_chance(p):
     return p > randrange(100)
 
 
-def random_ind_from_arr(prob_array):
-    # prob_array should add to 100
+# def random_ind_from_arr(prob_array):
+#     # prob_array should add to 1
 
-    num = randrange(100)
-    sum = 0
-    ind = 0
+#     print("FIRST", prob_array)
+#     num = randrange(100)
+#     sum = 0
+#     ind = 0
 
-    for i in prob_array:
-        sum += i*100
-        if sum > num:
-            return ind
-            # print("SHOT taken", ind)
-        ind += 1
-    return 5
+#     total = numpy.sum(prob_array)
+
+#     prob_array = numpy.array([x/total for x in prob_array])
+    
+
+#     print("2nd", prob_array)
+        
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+
+#     for i in prob_array:
+#         sum += i
+#         if sum > num:
+#             return ind
+#             # print("SHOT taken", ind)
+#         ind += 1
+#     return 5
+
+import numpy as np
+
+import random
+
+def weighted_choice(objects, weights):
+    """ returns randomly an element from the sequence of 'objects', 
+        the likelihood of the objects is weighted according 
+        to the sequence of 'weights', i.e. percentages."""
+
+    weights = np.array(weights, dtype=np.float64)
+    sum_of_weights = weights.sum()
+    # standardization:x
+    np.multiply(weights, 1 / sum_of_weights, weights)
+    weights = weights.cumsum()
+    x = random.random()
+    for i in range(len(weights)):
+        if x < weights[i]:
+            return objects[i]
+
+
 
 
 def team_turnover_odds(offRating, defRating):
@@ -68,34 +96,34 @@ def team_turnover_odds(offRating, defRating):
 # 3. Assign it to an offensive player
 # 4. Assign it to a defensive player
 # returns (turnover, offPlayerTurnover, defPlayerTurnover, timeLeft)
-def sim_turnover(homeTeamPlayers, awayTeamPlayers, timeLeft, possession, possessionStart):
+def sim_turnover(home_on_court, away_on_court, timeLeft, possession, possessionStart):
     # get to rate of the 5 players
     # get forced to rate of 5 def players
 
     # home team with ball
     if possession:
-        offToRating = sum(player.to for player in homeTeamPlayers)
-        defToRating = sum(player.stl for player in awayTeamPlayers)
+        offToPer100 = sum(player for player in home_on_court["Tov/100"]) / 5
+        defToPer100 = sum(player for player in away_on_court["Stl/100"]) / 5
 
     else:
-        offToRating = sum(player.to for player in homeTeamPlayers)
-        defToRating = sum(player.stl for player in awayTeamPlayers)
+        offToPer100 = sum(player for player in away_on_court["Tov/100"]) / 5
+        defToPer100 = sum(player for player in home_on_court["Stl/100"]) / 5
 
-    to_odds = team_turnover_odds(offToRating, defToRating)
-    print("odds", to_odds)
+    to_odds = team_turnover_odds(offToPer100, defToPer100)
     to_happened = random_chance(to_odds)
 
     # there was a turnover
 
+
     if to_happened:
         # find who committed turnover
         if possession:
-            to_player = homeTeamPlayers[randrange(4)]
-            def_to_player = awayTeamPlayers[randrange(4)]
+            to_player = home_on_court['Player'].to_numpy()[randrange(5)]
+            def_to_player = away_on_court["Player"].to_numpy()[randrange(5)]
             return to_happened, to_player, def_to_player, timeLeft - 1
         else:
-            to_player = awayTeamPlayers[randrange(4)]
-            def_to_player = homeTeamPlayers[randrange(4)]
+            to_player = away_on_court["Player"].to_numpy()[randrange(5)]
+            def_to_player = home_on_court['Player'].to_numpy()[randrange(5)]
             return to_happened, to_player, def_to_player, timeLeft - 1
 
     else:
@@ -103,11 +131,16 @@ def sim_turnover(homeTeamPlayers, awayTeamPlayers, timeLeft, possession, possess
 
 
 def sim_which_player_takes_shot(players):
-    total_usage = sum(player.twoFGrate for player in players)
+    # total_usage = sum(player.twoFGrate for player in players)
 
-    prob_arr = map(lambda x: x.twoFGrate/total_usage, players)
+    # prob_arr = map(lambda x: x.twoFGrate/total_usage, players)
+    player_names = players["Player"].to_numpy()
+    
+    prob_arr = players["FGA/100"].to_numpy()
 
-    return players[random_ind_from_arr(prob_arr)]
+
+    return player_names[weighted_choice([0, 1, 2, 3, 4], prob_arr)]
+
 
 
 def get_possession_time(homeTeamPlayers, possessionStart):
@@ -119,49 +152,51 @@ def get_possession_time(homeTeamPlayers, possessionStart):
         return 15
 
 
-def transition_possession(homeTeamPlayers, awayTeamPlayers, timeLeft, possession):
+def transition_possession(home_on_court, away_on_court, timeLeft, possession):
     to, offPlayerTurnover, defPlayerTurnover, timeLeft = sim_turnover(
-        homeTeamPlayers, awayTeamPlayers, timeLeft, possession, "transition")
+        home_on_court, away_on_court, timeLeft, possession, "transition")
 
     # keep deciding
 
     if possession:
-        offensive_players = homeTeamPlayers
+        offensive_players = home_on_court
     else:
-        offensive_players = awayTeamPlayers
+        offensive_players = away_on_court
+
     shooter = sim_which_player_takes_shot(offensive_players)
     if random_chance(50):
-        print(shooter.name, " SHOOTS, HE SCORES")
-        return "2", shooter.name
+        # print(shooter, " SHOOTS, HE SCORES")
+        return "2", shooter
     else:
-        print(shooter.name, " SHOOTS, HE MISSES")
-        return "0", shooter.name
+        # print(shooter, " SHOOTS, HE MISSES")
+        return "0", shooter
 
 
-def half_court_possession(homeTeamPlayers, awayTeamPlayers, timeLeft, possession):
 
-    play_type = get_play_type(homeTeamPlayers, awayTeamPlayers, timeLeft, possession)
-    to, offPlayerTurnover, defPlayerTurnover, timeLeft = sim_turnover(homeTeamPlayers, awayTeamPlayers, timeLeft, possession, play_type)
+def half_court_possession(home_on_court, away_on_court, timeLeft, possession):
+
+    play_type = get_play_type(home_on_court, away_on_court, timeLeft, possession)
+    to, offPlayerTurnover, defPlayerTurnover, timeLeft = sim_turnover(home_on_court, away_on_court, timeLeft, possession, play_type)
 
      # turnover happened. start possession for other team
     if to:
-        print("Turnover by", offPlayerTurnover.name, "HOME: ", homeScore, "AWAY: ", awayScore, "TIME: ", timeLeft)
-        return "turnover", offPlayerTurnover.name
+        # print("Turnover by", offPlayerTurnover, "HOME: ", homeScore, "AWAY: ", awayScore, "TIME: ", timeLeft)
+        return "turnover", offPlayerTurnover
 
     else:
         # get a shot off -> who shoots it
         
         if possession:
-            offensive_players = homeTeamPlayers
+            offensive_players = home_on_court
         else:
-            offensive_players = awayTeamPlayers
+            offensive_players = away_on_court
         shooter = sim_which_player_takes_shot(offensive_players)
         if random_chance(50):
-            print(shooter.name, " SHOOTS, HE SCORES")
-            return "2", shooter.name
+            # print(shooter, " SHOOTS, HE SCORES")
+            return "2", shooter
         else:
-            print(shooter.name, " SHOOTS, HE MISSES")
-            return "0", shooter.name
+            # print(shooter, " SHOOTS, HE MISSES")
+            return "0", shooter
            
 
 
@@ -182,7 +217,18 @@ def start_possession(homeTeamPlayers, awayTeamPlayers, timeLeft, homeScore, away
         # run non transition possession
     return outcome, player, possessionLength
     
+def get_real_players(team1, team2):
+    df = pd.read_csv("darko_daily.csv")
 
+    t1 = pd.DataFrame([])
+    t2 = pd.DataFrame([])
+
+    for row, index in df.iterrows():
+        if index["Team"] == team1:
+            t1 = t1.append(index)
+        if index["Team"] == team2:
+            t2 = t2.append(index)
+    return t1, t2
 
 # interlaken 190
 # EU PASS 7 day 274
@@ -204,56 +250,116 @@ def start_possession(homeTeamPlayers, awayTeamPlayers, timeLeft, homeScore, away
     # (possessionTeam, awayTeamPoints, homeTeamPoints, timeLeft)
 
 
+def damn_should_i_sub(team):
+
+    team["Court Score"] =  team["DPM"] - team["TO"]
+
+    return team.sort_values(by="Court Score").tail(5)
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
     homeScore = 0
     awayScore = 0
     possession = True
 
-    box_score = pd.DataFrame(columns=["NAME", "PTS", "REB", "AST", "BLK", "TO"], data=[
-        [p1.name, 0, 0, 0, 0, 0],
-        [p2.name, 0, 0, 0, 0, 0],
-        [p3.name, 0, 0, 0, 0, 0],
-        [p4.name, 0, 0, 0, 0, 0],
-        [p5.name, 0, 0, 0, 0, 0],
-        [p6.name, 0, 0, 0, 0, 0],
-        [p7.name, 0, 0, 0, 0, 0],
-        [p8.name, 0, 0, 0, 0, 0],
-        [p9.name, 0, 0, 0, 0, 0],
-        [p10.name, 0, 0, 0, 0, 0],
-    ])
+    # box_score = pd.DataFrame(columns=["NAME", "PTS", "REB", "AST", "BLK", "TO"], data=[
+    #     [p1.name, 0, 0, 0, 0, 0],
+    #     [p2.name, 0, 0, 0, 0, 0],
+    #     [p3.name, 0, 0, 0, 0, 0],
+    #     [p4.name, 0, 0, 0, 0, 0],
+    #     [p5.name, 0, 0, 0, 0, 0],
+    #     [p6.name, 0, 0, 0, 0, 0],
+    #     [p7.name, 0, 0, 0, 0, 0],
+    #     [p8.name, 0, 0, 0, 0, 0],
+    #     [p9.name, 0, 0, 0, 0, 0],
+    #     [p10.name, 0, 0, 0, 0, 0],
+    # ])
 
 
-    timeLeft = 200
+    
 
-    while timeLeft > 0:
-        outcome, player, possessionLength = start_possession([p1, p2, p3, p4, p5], [p6, p7, p8, p9, p10], timeLeft, homeScore, awayScore, possession, "rebound")
-        timeLeft -= possessionLength
 
-        if outcome == "turnover":
-            # increment the box score
-            box_score.loc[box_score["NAME"] == player, 'TO'] += 1
-        elif outcome == "2":
-            if possession:
-                homeScore += 2
-            else:
-                awayScore += 2
-            box_score.loc[box_score["NAME"] == player, 'PTS'] += 2
-        elif outcome == "3":
-            if possession:
-                homeScore += 3
-            else:
-                awayScore += 3
-            box_score.loc[box_score["NAME"] == player, 'PTS'] += 3
+    home, away = get_real_players("Milwaukee Bucks", "Phoenix Suns")
+    box_score = away.append(home)
+  
+    box_score.insert(2, "PTS", [0]*33, True)
+    box_score.insert(3, "SEC", [0]*33, True)
+    box_score.insert(2, "TO", [0]*33, True)
+    home.insert(2, "PTS", [0]*17, True)
+    home.insert(2, "TO", [0]*17, True)
+    away.insert(2, "PTS", [0]*16, True)
+    away.insert(2, "TO", [0]*16, True)
+    
 
-        possession = not possession
-        print("HOME: ", homeScore, "AWAY: ", awayScore, "TIME: ", timeLeft)
+    home_on_court = home.head(5)
+    away_on_court = away.head(5)
+
+    timeLeft = 600
+    quarter = 0
+
+    while quarter < 4:
+        while timeLeft > 0:
+            # if random_chance(50):
+            #     home_on_court = damn_should_i_sub(home)
+            #     away_on_court = damn_should_i_sub(away)
+
+            outcome, player, possessionLength = start_possession(home_on_court,away_on_court, timeLeft, homeScore, awayScore, possession, "rebound")
+            timeLeft -= possessionLength
+
+            for player in home_on_court["Player"].to_numpy():
+                box_score.loc[box_score["Player"] == player, "SEC"] += possessionLength
+
+            for player in away_on_court["Player"].to_numpy():
+                box_score.loc[box_score["Player"] == player, "SEC"] += possessionLength
+            
+
+
+            if outcome == "turnover":
+                # increment the box score
+                if possession:
+                    home.loc[box_score["Player"] == player, 'TO'] += 1
+                else:
+                    away.loc[box_score["Player"] == player, 'TO'] += 1
+                box_score.loc[box_score["Player"] == player, 'TO'] += 1
+            elif outcome == "2":
+                if possession:
+                    homeScore += 2
+                else:
+                    awayScore += 2
+                box_score.loc[box_score["Player"] == player, 'PTS'] += 2
+            elif outcome == "3":
+                if possession:
+                    homeScore += 3
+                else:
+                    awayScore += 3
+                box_score.loc[box_score["Player"] == player, 'PTS'] += 3
+
+            possession = not possession
+        
+        quarter+=1
+        timeLeft = 600
+        print("HOME: ", homeScore, "AWAY: ", awayScore)
+        print("END ", quarter, " QUARTER")
+
+    
+    # box_score.insert(2, "MIN", round(box_score["SEC"] / 60, 0), True)
     print(box_score)
 
 
+    box_score.to_csv("box.csv")
+
+
+
+
+
+     
+ 
+        
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
+
 
 
 
