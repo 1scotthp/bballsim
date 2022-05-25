@@ -4,6 +4,8 @@
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
 from cmath import nan
+from multiprocessing.sharedctypes import Value
+from operator import concat
 from random import randrange
 
 import numpy
@@ -144,11 +146,11 @@ def sim_which_player_takes_shot(players):
     
     prob_arr = players["FGA/100"].to_numpy()
 
-
     return player_names[weighted_choice([0, 1, 2, 3, 4], prob_arr)]
 
 
 
+### 
 def get_possession_time(homeTeamPlayers, possessionStart):
     if random_chance(40):
         return 3
@@ -172,11 +174,8 @@ def transition_possession(home_on_court, away_on_court, timeLeft, possession):
     shooter = sim_which_player_takes_shot(offensive_players)
     
     offensive_players = offensive_players.to_dict()
-    for i in offensive_players.keys():
-        print(offensive_players[i])
-
-    
-
+    # for i in offensive_players.keys():
+    #     print(offensive_players[i])
 
     # for prob in offensive_players["FG2%"]:
     #     print(a[:-1])
@@ -189,8 +188,60 @@ def transition_possession(home_on_court, away_on_court, timeLeft, possession):
         return "0", shooter
 
 
+LEAGUE_O_REB_3 = 0.3
+LEAGUE_O_REB_2 = 0.2
+
+darko_df = pd.read_csv("data/daily.csv")
+darko_df["REBRATING_O"] = darko_df["daily_Minutes"] * darko_df["daily_Pace"] * darko_df["daily_OREB"]
+darko_df["REBRATING_D"] = darko_df["daily_Minutes"] * darko_df["daily_Pace"] * darko_df["daily_DREB"]
+print(darko_df)
+### get darko stats and then do other stuff
+
+#TODO this
+def sim_rebound(offense, defense):
+    offense = offense.to_dict()
+    defense = defense.to_dict()
+
+    off_names = []
+    def_ratings = []
+
+    # player_dict = {}
+  
+    for key in offense["Player"].keys():
+        print(offense["Player"][key])
+    
+
+    # print(player_dict)
+    d = darko_df.to_dict()
+
+    for key in d.items():
+        # print(key)
+        if key[0] == "REBRATING_O":
+            data = list(key[1].items())
+            off_ratings = np.array(data)
+
+    print(len(off_ratings))
+
+
+
+    #### for each key we have, get that players o reb from darko
+
+    
+        # [off_ratings.append(player) for player in offense.items() if name == player]
+
+    # for name in defense["Player"]:
+    #     [def_ratings.append(player) for player in offense.items() if name == player]
+    # print(off_ratings, def_ratings)
+    
+
+
+ 
+
+
+
 
 def half_court_possession(home_on_court, away_on_court, timeLeft, possession):
+    ## before play type assign player
 
     play_type = get_play_type(home_on_court, away_on_court, timeLeft, possession)
     to, offPlayerTurnover, defPlayerTurnover, timeLeft = sim_turnover(home_on_court, away_on_court, timeLeft, possession, play_type)
@@ -205,19 +256,23 @@ def half_court_possession(home_on_court, away_on_court, timeLeft, possession):
         
         if possession:
             offensive_players = home_on_court
+            defensive_players = away_on_court
         else:
             offensive_players = away_on_court
+            defensive_players = away_on_court
         shooter = sim_which_player_takes_shot(offensive_players)
         if random_chance(50):
             # print(shooter, " SHOOTS, HE SCORES")
             return "2", shooter
         else:
             # print(shooter, " SHOOTS, HE MISSES")
+            sim_rebound(offensive_players, defensive_players)
             return "0", shooter
            
 
 
 
+# given players choose play type distribution
 def get_play_type(homeTeamPlayers, awayTeamPlayers, timeLeft, possession):
     play_type = "none"
 
@@ -235,7 +290,7 @@ def start_possession(homeTeamPlayers, awayTeamPlayers, timeLeft, homeScore, away
     return outcome, player, possessionLength
     
 def get_real_players(team1, team2):
-    df = pd.read_csv("darko_daily.csv")
+    df = pd.read_csv("darko.csv")
 
     t1 = pd.DataFrame([])
     t2 = pd.DataFrame([])
@@ -260,9 +315,7 @@ def get_real_players(team1, team2):
 
 
 def damn_should_i_sub(team):
-
     team["Court Score"] =  team["DPM"] - team["TO"]
-
     return team.sort_values(by="Court Score").tail(5)
 
 # Press the green button in the gutter to run the script.
@@ -303,7 +356,6 @@ if __name__ == '__main__':
 
         box_score = pd.concat([home, away])
 
-        print("DUPED", box_score[box_score.index.duplicated()])
     
         box_score.insert(0, "PTS", 0, True)
         box_score.insert(14, "SEC", 0, True)
@@ -340,9 +392,9 @@ if __name__ == '__main__':
                 if outcome == "turnover":
                     # increment the box score
                     if possession:
-                        home.loc[box_score["Player"] == player, 'TO'] += 1
+                        home.loc[home["Player"] == player, 'TO'] += 1
                     else:
-                        away.loc[box_score["Player"] == player, 'TO'] += 1
+                        away.loc[away["Player"] == player, 'TO'] += 1
                     box_score.loc[box_score["Player"] == player, 'TO'] += 1
                 elif outcome == "2":
                     if possession:
