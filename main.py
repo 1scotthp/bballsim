@@ -1,5 +1,7 @@
 from cmath import nan
+import csv
 from doctest import master
+import json
 import pandas as pd
 
 
@@ -99,4 +101,45 @@ while i < len(arr) - 1:
     y.append(arr[i+1])
     i += 2
 
-print(y)
+# print(y)
+
+
+
+def make_json(csvFilePath, jsonFilePath):
+     
+    # create a dictionary
+    data = {}
+     
+    # Open a csv reader called DictReader
+    with open(csvFilePath, encoding='utf-8') as csvf:
+        csvReader = csv.DictReader(csvf)
+         
+        # Convert each row into a dictionary
+        # and add it to data
+        i = 0
+        for rows in csvReader:
+             
+            # Assuming a column named 'No' to
+            # be the primary key
+
+            rows["FG3A/100"] = float(rows["FG3A/100"])
+            rows["FGA/100"] = float(rows["FGA/100"])
+            rows["Usg%"] = float(rows["Usg%"][0:4])
+
+            rows["FG2%"] = float(rows["FG2%"][0:4])
+            rows["FG3%"] = float(rows["FG3%"][0:4])
+            # print(rows["Usg%"])
+            key = i
+            data[key] = rows
+            i+=1
+ 
+    # Open a json writer, and use the json.dumps()
+    # function to dump data
+    with open(jsonFilePath, 'w', encoding='utf-8') as jsonf:
+        jsonf.write(json.dumps(data, indent=4))
+
+make_json("darko.csv", "darko.json")
+
+
+
+# print(pd.read_json("darko.json"))
