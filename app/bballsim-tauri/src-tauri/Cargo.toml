@@ -8,18 +8,23 @@ repository = ""
 default-run = "app"
 edition = "2021"
 rust-version = "1.57"
+build="build.rs"
+include= ["assets"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "1.0.0-rc.10", features = [] }
-tauri_includedir = "0.6.1"
+tauri-build = { version = "1.0.0-rc.10", features = ["codegen"] }
+
+tauri_includedir_codegen = "0.6.3"
 
 
 
 [dependencies]
 serde_json = "1.0"
-tauri_includedir_codegen = "0.6.3"
+phf = "0.10.1"
+tauri_includedir = "0.6.1"
+
 serde = { version = "1.0", features = ["derive"] }
 tauri = { version = "1.0.0-rc.12", features = ["api-all"] }
 rand = "0.8.5"

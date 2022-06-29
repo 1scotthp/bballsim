@@ -27,6 +27,7 @@ struct box_score_entry {
 
 
 
+
 fn outcome_from_prob (prob: f32) -> bool {
   let num = rand::thread_rng().gen_range(0..100) as f32;
 
@@ -126,8 +127,7 @@ fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec
   println!("{}", "COMMAND22".to_string());
 
 
-  
-  let data = fs::read_to_string("src/darko.json").unwrap();
+  let data = fs::read_to_string("assets/darko.json").unwrap();
     // println!("{}", data);
 
 
@@ -429,7 +429,7 @@ fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec
 
   let duration = start.elapsed();
 
-  println!("Time to simulate 1/2 season of games is: {:?}", duration * 82 * 8);
+  println!("Time elapsed in expensive_function() is: {:?}", duration * 82 * 8);
 
 
 
@@ -437,7 +437,7 @@ fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec
 
   
   // print_type_of(f.unwrap());
-  let mut file = File::create("test.txt");
+  // let mut file = File::create("test.txt");
   // serde_json::to_writer(file.unwrap(), &box_score_home);
 
   println!("I was invoked from JS!");
@@ -457,8 +457,26 @@ fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec
   (home_score, away_score)
 }
 
+// extern crate tauri_includedir;
+// extern crate phf;
+
+use tauri_includedir;
+use phf;
+use std::env;
+include!(concat!(env!("OUT_DIR"), "/assets/darko.json"));
+
 fn main() {
+
+
   tauri::Builder::default()
+  // .setup(move |app| {
+  //   let script_path = app
+  //   .path_resolver()
+  //   .resolve_resource("assets/darko.json")
+  //   .unwrap()
+  //   .to_string_lossy()
+  //   .to_string();
+  // })
     .invoke_handler(tauri::generate_handler![my_custom_command])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

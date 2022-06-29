@@ -1,5 +1,4 @@
 {
-
   "build": {
     "beforeBuildCommand": "yarn build",
     "beforeDevCommand": "yarn start",
@@ -12,12 +11,7 @@
   },
   "tauri": {
     "allowlist": {
-      "all": true,
-      "fs": {
-        "readFile": true,
-        "writeFile": true,
-        "scope": ["*"]
-    }
+      "all": true
     },
     "bundle": {
       "active": true,
@@ -43,7 +37,7 @@
         "providerShortName": null,
         "signingIdentity": null
       },
-      "resources": ["./darko.json"],
+      "resources": ["assets/darko.json", "./darko.json"],
       "shortDescription": "",
       "targets": "all",
       "windows": {
