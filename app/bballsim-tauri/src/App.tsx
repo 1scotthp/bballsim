@@ -150,26 +150,25 @@ function App() {
 
   const runGame = () => {
     console.log("NAMES", homeTeamName, awayTeamName);
-    alert(homeTeamName);
-    alert(awayTeamName);
+
     invoke("my_custom_command", {
       team1: homeTeamName,
       team2: awayTeamName,
+    })
+    .then((message: any) => {
+      setHome(
+        message[0].sort(
+          (a: box_score_entry, b: box_score_entry) => b.sec - a.sec
+        )
+      );
+      setAway(
+        message[1].sort(
+          (a: box_score_entry, b: box_score_entry) => b.sec - a.sec
+        )
+      );
+    }).catch((e) => {
+      console.log(e)
     });
-    // .then((message: any) => {
-    //   setHome(
-    //     message[0].sort(
-    //       (a: box_score_entry, b: box_score_entry) => b.sec - a.sec
-    //     )
-    //   );
-    //   setAway(
-    //     message[1].sort(
-    //       (a: box_score_entry, b: box_score_entry) => b.sec - a.sec
-    //     )
-    //   );
-    // }).catch((e) => {
-    //   console.log(e)
-    // });
   };
 
   const options = [

@@ -119,7 +119,7 @@ struct team_score {
 
 
 #[tauri::command]
-fn my_custom_command(team1: String, team2: String){
+fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec<box_score_entry>){
 
   
 
@@ -218,243 +218,243 @@ fn my_custom_command(team1: String, team2: String){
 
 
 
-  // let mut timeleft = 720;
-  // let mut quarter = 1;
+  let mut timeleft = 720;
+  let mut quarter = 1;
 
-  // let mut possession: i8 = 0;
-  // let mut possession_time: i32 = 0;
-  // let mut outcome: Outcome;
-  // let mut player: usize;
+  let mut possession: i8 = 0;
+  let mut possession_time: i32 = 0;
+  let mut outcome: Outcome;
+  let mut player: usize;
 
 
 
-  // let start = Instant::now();
-  // //ratings for each player should be processed into what is useable here
+  let start = Instant::now();
+  //ratings for each player should be processed into what is useable here
 
-  // while quarter < 5 {
-  //   while timeleft > 0 {
+  while quarter < 5 {
+    while timeleft > 0 {
      
-  //     let home_on_court = &home[0 .. 5];
-  //     let away_on_court =  &away[0 .. 5];
+      let home_on_court = &home[0 .. 5];
+      let away_on_court =  &away[0 .. 5];
 
-  //     if possession == 0 {
-  //       (possession_time, outcome) = start_possession(&home_on_court, &away_on_court);
+      if possession == 0 {
+        (possession_time, outcome) = start_possession(&home_on_court, &away_on_court);
 
-  //       let player_name = &home_on_court[outcome.player_index].player;
+        let player_name = &home_on_court[outcome.player_index].player;
 
-  //       if outcome.shot_type == 2 {
-  //         if outcome.points > 0{
-  //           if let Some(x) = box_score_home.get_mut(player_name){
-  //             x.fga += 1;
-  //             x.fgm += 1
+        if outcome.shot_type == 2 {
+          if outcome.points > 0{
+            if let Some(x) = box_score_home.get_mut(player_name){
+              x.fga += 1;
+              x.fgm += 1
 
-  //           }
-  //         } else {
-  //           if let Some(x) = box_score_home.get_mut(player_name){
-  //             x.fga += 1;
-  //           }
+            }
+          } else {
+            if let Some(x) = box_score_home.get_mut(player_name){
+              x.fga += 1;
+            }
 
-  //         }
-  //       } else if outcome.shot_type == 3 {
-  //         if outcome.points > 0{
-  //           if let Some(x) = box_score_home.get_mut(player_name){
-  //             x.fg3a += 1;
-  //             x.fg3m += 1;
-  //             x.fgm += 1;
-  //             x.fga += 1;
+          }
+        } else if outcome.shot_type == 3 {
+          if outcome.points > 0{
+            if let Some(x) = box_score_home.get_mut(player_name){
+              x.fg3a += 1;
+              x.fg3m += 1;
+              x.fgm += 1;
+              x.fga += 1;
 
-  //           }
-  //         } else {
-  //           if let Some(x) = box_score_home.get_mut(player_name){
-  //             x.fg3a += 1;
-  //             x.fga += 1
-  //           }
+            }
+          } else {
+            if let Some(x) = box_score_home.get_mut(player_name){
+              x.fg3a += 1;
+              x.fga += 1
+            }
 
-  //         }
-  //       } else if outcome.shot_type == 0 {
-  //         if let Some(x) = box_score_home.get_mut(player_name){
-  //           x.tov += 1;
-  //         }
+          }
+        } else if outcome.shot_type == 0 {
+          if let Some(x) = box_score_home.get_mut(player_name){
+            x.tov += 1;
+          }
 
-  //         if let Some(x) = box_score_away.get_mut(player_name){
-  //           x.stl += 1;
-  //         }
+          if let Some(x) = box_score_away.get_mut(player_name){
+            x.stl += 1;
+          }
 
-  //       }
-
-
-  //       // let entry = box_score_home.get_mut(player_name);
-
-  //       if let Some(x) = box_score_home.get_mut(player_name){
-  //         x.pts += outcome.points;
-  //       }
+        }
 
 
-  //       // better way to do this is only when there is a sub, incremement minutes
-  //       for player in home_on_court{
-  //         if let Some(x) = box_score_home.get_mut(&player.player){
-  //           x.sec += possession_time
-  //         }
-  //       }
+        // let entry = box_score_home.get_mut(player_name);
 
-  //       for player in away_on_court{
-  //         if let Some(x) = box_score_away.get_mut(&player.player){
-  //           x.sec += possession_time
-  //         }
-  //       }
+        if let Some(x) = box_score_home.get_mut(player_name){
+          x.pts += outcome.points;
+        }
 
-  //       // entry.pts += 3;
 
-  //       // println!("player {} {}", home_on_court[player], box_score_home[player_name].pts);
-  //       // box_score_home[player].pts += 3;
+        // better way to do this is only when there is a sub, incremement minutes
+        for player in home_on_court{
+          if let Some(x) = box_score_home.get_mut(&player.player){
+            x.sec += possession_time
+          }
+        }
+
+        for player in away_on_court{
+          if let Some(x) = box_score_away.get_mut(&player.player){
+            x.sec += possession_time
+          }
+        }
+
+        // entry.pts += 3;
+
+        // println!("player {} {}", home_on_court[player], box_score_home[player_name].pts);
+        // box_score_home[player].pts += 3;
         
-  //       possession = 1;
-  //     }
-  //     else {
-  //       (possession_time, outcome) = start_possession(&away_on_court, &home_on_court);
+        possession = 1;
+      }
+      else {
+        (possession_time, outcome) = start_possession(&away_on_court, &home_on_court);
 
 
-  //       let player_name = &away_on_court[outcome.player_index].player;
+        let player_name = &away_on_court[outcome.player_index].player;
 
 
-  //       if outcome.shot_type == 2 {
-  //         if outcome.points > 0{
-  //           if let Some(x) = box_score_away.get_mut(player_name){
-  //             x.fga += 1;
-  //             x.fgm += 1
-  //           }
-  //         } else {
-  //           if let Some(x) = box_score_away.get_mut(player_name){
-  //             x.fga += 1;
-  //           }
+        if outcome.shot_type == 2 {
+          if outcome.points > 0{
+            if let Some(x) = box_score_away.get_mut(player_name){
+              x.fga += 1;
+              x.fgm += 1
+            }
+          } else {
+            if let Some(x) = box_score_away.get_mut(player_name){
+              x.fga += 1;
+            }
 
-  //         }
+          }
 
  
-  //       } else if outcome.shot_type == 3 {
-  //         if outcome.points > 0{
-  //           if let Some(x) = box_score_away.get_mut(player_name){
-  //             x.fg3a += 1;
-  //             x.fg3m += 1;
-  //             x.fgm += 1;
-  //             x.fga += 1;
-  //           }
-  //         } else {
-  //           if let Some(x) = box_score_away.get_mut(player_name){
-  //             x.fg3a += 1;
-  //             x.fga += 1;
-  //           }
+        } else if outcome.shot_type == 3 {
+          if outcome.points > 0{
+            if let Some(x) = box_score_away.get_mut(player_name){
+              x.fg3a += 1;
+              x.fg3m += 1;
+              x.fgm += 1;
+              x.fga += 1;
+            }
+          } else {
+            if let Some(x) = box_score_away.get_mut(player_name){
+              x.fg3a += 1;
+              x.fga += 1;
+            }
 
-  //         }
-  //       } else if outcome.shot_type == 0 {
-  //         if let Some(x) = box_score_away.get_mut(player_name){
-  //           x.tov += 1;
-  //         }
+          }
+        } else if outcome.shot_type == 0 {
+          if let Some(x) = box_score_away.get_mut(player_name){
+            x.tov += 1;
+          }
 
-  //         if let Some(x) = box_score_home.get_mut(player_name){
-  //           x.stl += 1;
-  //         }
+          if let Some(x) = box_score_home.get_mut(player_name){
+            x.stl += 1;
+          }
 
-  //       }
-
-
-
-  //       if let Some(x) = box_score_away.get_mut(player_name){
-  //         x.pts += outcome.points;
-  //       }
-
-  //       for player in home_on_court{
-  //         if let Some(x) = box_score_home.get_mut(&player.player){
-  //           x.sec += possession_time
-  //         }
-  //       }
-
-  //       for player in away_on_court{
-  //         if let Some(x) = box_score_away.get_mut(&player.player){
-  //           x.sec += possession_time
-  //         }
-  //       }
-
-  //       // box_score_away[player_name].pts += 3;
-
-  //       // box_score_away[player].pts += 3;
-  //       possession = 0
-  //     }
-  //     // should subtract possession time
-  //     timeleft -= possession_time;
-
-  //     if outcome_from_prob(6.0){
-  //       let i1: usize = damn_should_i_sub(&home_on_court, &box_score_home);
-  //       let mut i2;
-  //       if outcome_from_prob(33.0){
-  //         i2 = 6
-  //       } else if outcome_from_prob(33.0) {
-  //         i2 = 7
-  //       } else  if outcome_from_prob(33.0){
-  //         i2 = 8 
-  //       } else {  
-  //         i2 = 9
-  //       }
-  //       // println!("{} {}", i1, i2);
-  //       home.swap(i1, i2)
-
-  //       // here update the team ratings based on the substitution
-  //     }
-
-  //     if outcome_from_prob(6.0){
-  //       let i1: usize = damn_should_i_sub(&away_on_court, &box_score_away);
-  //       let mut i2;
-  //       if outcome_from_prob(40.0){
-  //         i2 = 6
-  //       } else if outcome_from_prob(40.0) {
-  //         i2 = 7
-  //       } else {
-  //         i2 = 8
-  //       }
-  //       // println!("{} {}", i1, i2);
-  //       away.swap(i1, i2)
-
-  //       // here update the team ratings based on the substitution
-  //     }
+        }
 
 
-  //   }
-  //   quarter += 1;
-  //   timeleft = 720
+
+        if let Some(x) = box_score_away.get_mut(player_name){
+          x.pts += outcome.points;
+        }
+
+        for player in home_on_court{
+          if let Some(x) = box_score_home.get_mut(&player.player){
+            x.sec += possession_time
+          }
+        }
+
+        for player in away_on_court{
+          if let Some(x) = box_score_away.get_mut(&player.player){
+            x.sec += possession_time
+          }
+        }
+
+        // box_score_away[player_name].pts += 3;
+
+        // box_score_away[player].pts += 3;
+        possession = 0
+      }
+      // should subtract possession time
+      timeleft -= possession_time;
+
+      if outcome_from_prob(6.0){
+        let i1: usize = damn_should_i_sub(&home_on_court, &box_score_home);
+        let mut i2;
+        if outcome_from_prob(33.0){
+          i2 = 6
+        } else if outcome_from_prob(33.0) {
+          i2 = 7
+        } else  if outcome_from_prob(33.0){
+          i2 = 8 
+        } else {  
+          i2 = 9
+        }
+        // println!("{} {}", i1, i2);
+        home.swap(i1, i2)
+
+        // here update the team ratings based on the substitution
+      }
+
+      if outcome_from_prob(6.0){
+        let i1: usize = damn_should_i_sub(&away_on_court, &box_score_away);
+        let mut i2;
+        if outcome_from_prob(40.0){
+          i2 = 6
+        } else if outcome_from_prob(40.0) {
+          i2 = 7
+        } else {
+          i2 = 8
+        }
+        // println!("{} {}", i1, i2);
+        away.swap(i1, i2)
+
+        // here update the team ratings based on the substitution
+      }
+
+
+    }
+    quarter += 1;
+    timeleft = 720
+  }
+
+  // for (key, val) in &box_score_home {
+  //   println!("key: {key} val: {}", val.pts);
   // }
 
-  // // for (key, val) in &box_score_home {
-  // //   println!("key: {key} val: {}", val.pts);
-  // // }
+  let duration = start.elapsed();
 
-  // let duration = start.elapsed();
-
-  // println!("Time elapsed in expensive_function() is: {:?}", duration * 82 * 4);
+  println!("Time to simulate 1/2 season of games is: {:?}", duration * 82 * 8);
 
 
 
-  // // println!("khris {}", box_score_home["Khris Middleton"].pts);
+  // println!("khris {}", box_score_home["Khris Middleton"].pts);
 
   
-  // // print_type_of(f.unwrap());
-  // let mut file = File::create("test.txt");
-  // // serde_json::to_writer(file.unwrap(), &box_score_home);
+  // print_type_of(f.unwrap());
+  let mut file = File::create("test.txt");
+  // serde_json::to_writer(file.unwrap(), &box_score_home);
 
-  // println!("I was invoked from JS!");
+  println!("I was invoked from JS!");
 
-  // let home_score: Vec<box_score_entry> = box_score_home.into_iter()
-  //                       .map(|(_id, score)| score)
-  //                       .collect();
+  let home_score: Vec<box_score_entry> = box_score_home.into_iter()
+                        .map(|(_id, score)| score)
+                        .collect();
 
-  // let away_score: Vec<box_score_entry> = box_score_away.into_iter()
-  //                                       .map(|(_id, score)| score)
-  //                                       .collect();
+  let away_score: Vec<box_score_entry> = box_score_away.into_iter()
+                                        .map(|(_id, score)| score)
+                                        .collect();
 
-  // // Ok("worked".into())
+  // Ok("worked".into())
 
 
   // println!("{}", all_scores[0].name);
-  // (home_score, away_score)
+  (home_score, away_score)
 }
 
 fn main() {
