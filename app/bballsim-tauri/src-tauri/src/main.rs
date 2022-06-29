@@ -10,12 +10,21 @@ use std::time::Instant;
 
 #[derive(serde::Serialize)]
 struct box_score_entry {
+  dpm: f32,
+  name: String,
   pts: i32,
+  fgm: i32,
+  fg3m: i32,
+  fga: i32,
+  fg3a: i32,
   reb: i32,
   ast: i32,
+  tov: i32,
+  stl: i32,
   sec: i32,
   min: i32
 }
+
 
 
 fn outcome_from_prob (prob: f32) -> bool {
@@ -41,14 +50,19 @@ fn damn_should_i_sub(on_court: &[&Player], box_score: &HashMap<String, box_score
   let mut ratings: PriorityQueue<usize, i32> = PriorityQueue::new();
 
 
+  // - (box_score[&player.player].sec / 20 ) as f32 
+
   let mut i = 0;
   for player in on_court {
-    ratings.push(i, box_score[&player.player].sec / 60 - 5*box_score[&player.player].pts + 20);
+    // println!("{} {}", player.player, (- player.dpm as f32 - player.usg / 2.0 as f32) as i32 + 20 + box_score[&player.player].sec);
+
+    ratings.push(i, ((player.dpm * -2.0 - player.usg) as i32 + i32::pow(box_score[&player.player].sec / 60, 2))/3 as i32);
+
     i+=1
   }
 
-  // player who might be subbed is at the top
-  // println!("{} {}", ratings.peek().unwrap());
+  // // player who might be subbed is at the top
+  // println!("{} {}", on_court[*ratings.peek().unwrap().0], ratings.peek().unwrap().1);
 
   let ind = ratings.peek().unwrap().0;
 
@@ -90,14 +104,24 @@ fn damn_should_i_sub(on_court: &[&Player], box_score: &HashMap<String, box_score
 
 }
 
+// HashMap<String, box_score_entry>
+
+
+struct player_score {
+  score: f32
+}
+
+struct team_score {
+  score: f32
+}
+
 
 #[tauri::command]
-fn my_custom_command() -> Result<String, String> {
+fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec<box_score_entry>){
 
   println!("{}", "COMMAND22".to_string());
 
-  let team1 = "Milwaukee Bucks";
-  let team2 = "Phoenix Suns";
+
   
   let data = fs::read_to_string("../../../darko.json").unwrap();
     // println!("{}", data);
@@ -130,16 +154,29 @@ fn my_custom_command() -> Result<String, String> {
   }
 
 
+  home.sort_by(|a, b| a.dpm.partial_cmp(&b.dpm).unwrap().reverse());
+  away.sort_by(|a, b| a.dpm.partial_cmp(&b.dpm).unwrap().reverse());
+
+
+
 
   let mut box_score_home: HashMap<String, box_score_entry> = HashMap::with_capacity(15);
   let mut box_score_away: HashMap<String, box_score_entry> = HashMap::with_capacity(15);
   
   for player in &home {
     let a = player.player.clone();
-    box_score_home.insert(a, {box_score_entry {
+    box_score_home.insert(a.clone(), {box_score_entry {
+      dpm: player.dpm,
+      name: a,
       pts: 0,
+      fgm: 0,
+      fg3m: 0,
+      fga: 0,
+      fg3a: 0,
       reb: 0,
       ast: 0,
+      stl: 0,
+      tov: 0,
       sec: 0,
       min: 0
     }});
@@ -148,10 +185,18 @@ fn my_custom_command() -> Result<String, String> {
   for player in &away {
     let a = player.player.clone();
 
-    box_score_away.insert(a, {box_score_entry{
+    box_score_away.insert(a.clone(), {box_score_entry{
+      dpm: player.dpm,
+      name: a, 
       pts: 0,
+      fgm: 0,
+      fg3m: 0,
+      fga: 0,
+      fg3a: 0,
       reb: 0,
-      ast: 0,
+      ast: 0,  
+      stl: 0,
+      tov: 0,
       sec: 0,
       min: 0
     }});
@@ -182,11 +227,11 @@ fn my_custom_command() -> Result<String, String> {
 
 
   let start = Instant::now();
-    
+  //ratings for each player should be processed into what is useable here
 
-  // box score editing works in this function !!!!!
   while quarter < 5 {
     while timeleft > 0 {
+     
       let home_on_court = &home[0 .. 5];
       let away_on_court =  &away[0 .. 5];
 
@@ -194,6 +239,47 @@ fn my_custom_command() -> Result<String, String> {
         (possession_time, outcome) = start_possession(&home_on_court, &away_on_court);
 
         let player_name = &home_on_court[outcome.player_index].player;
+
+        if outcome.shot_type == 2 {
+          if outcome.points > 0{
+            if let Some(x) = box_score_home.get_mut(player_name){
+              x.fga += 1;
+              x.fgm += 1
+
+            }
+          } else {
+            if let Some(x) = box_score_home.get_mut(player_name){
+              x.fga += 1;
+            }
+
+          }
+        } else if outcome.shot_type == 3 {
+          if outcome.points > 0{
+            if let Some(x) = box_score_home.get_mut(player_name){
+              x.fg3a += 1;
+              x.fg3m += 1;
+              x.fgm += 1;
+              x.fga += 1;
+
+            }
+          } else {
+            if let Some(x) = box_score_home.get_mut(player_name){
+              x.fg3a += 1;
+              x.fga += 1
+            }
+
+          }
+        } else if outcome.shot_type == 0 {
+          if let Some(x) = box_score_home.get_mut(player_name){
+            x.tov += 1;
+          }
+
+          if let Some(x) = box_score_away.get_mut(player_name){
+            x.stl += 1;
+          }
+
+        }
+
 
         // let entry = box_score_home.get_mut(player_name);
 
@@ -210,7 +296,7 @@ fn my_custom_command() -> Result<String, String> {
         }
 
         for player in away_on_court{
-          if let Some(x) = box_score_home.get_mut(&player.player){
+          if let Some(x) = box_score_away.get_mut(&player.player){
             x.sec += possession_time
           }
         }
@@ -225,7 +311,51 @@ fn my_custom_command() -> Result<String, String> {
       else {
         (possession_time, outcome) = start_possession(&away_on_court, &home_on_court);
 
+
         let player_name = &away_on_court[outcome.player_index].player;
+
+
+        if outcome.shot_type == 2 {
+          if outcome.points > 0{
+            if let Some(x) = box_score_away.get_mut(player_name){
+              x.fga += 1;
+              x.fgm += 1
+            }
+          } else {
+            if let Some(x) = box_score_away.get_mut(player_name){
+              x.fga += 1;
+            }
+
+          }
+
+ 
+        } else if outcome.shot_type == 3 {
+          if outcome.points > 0{
+            if let Some(x) = box_score_away.get_mut(player_name){
+              x.fg3a += 1;
+              x.fg3m += 1;
+              x.fgm += 1;
+              x.fga += 1;
+            }
+          } else {
+            if let Some(x) = box_score_away.get_mut(player_name){
+              x.fg3a += 1;
+              x.fga += 1;
+            }
+
+          }
+        } else if outcome.shot_type == 0 {
+          if let Some(x) = box_score_away.get_mut(player_name){
+            x.tov += 1;
+          }
+
+          if let Some(x) = box_score_home.get_mut(player_name){
+            x.stl += 1;
+          }
+
+        }
+
+
 
         if let Some(x) = box_score_away.get_mut(player_name){
           x.pts += outcome.points;
@@ -238,7 +368,7 @@ fn my_custom_command() -> Result<String, String> {
         }
 
         for player in away_on_court{
-          if let Some(x) = box_score_home.get_mut(&player.player){
+          if let Some(x) = box_score_away.get_mut(&player.player){
             x.sec += possession_time
           }
         }
@@ -251,23 +381,25 @@ fn my_custom_command() -> Result<String, String> {
       // should subtract possession time
       timeleft -= possession_time;
 
-      if outcome_from_prob(5.0){
-        println!("{}", "shd i sub".to_string());
+      if outcome_from_prob(6.0){
         let i1: usize = damn_should_i_sub(&home_on_court, &box_score_home);
         let mut i2;
-        if outcome_from_prob(40.0){
+        if outcome_from_prob(33.0){
           i2 = 6
-        } else if outcome_from_prob(40.0) {
+        } else if outcome_from_prob(33.0) {
           i2 = 7
-        } else {
-          i2 = 8
+        } else  if outcome_from_prob(33.0){
+          i2 = 8 
+        } else {  
+          i2 = 9
         }
         // println!("{} {}", i1, i2);
         home.swap(i1, i2)
+
+        // here update the team ratings based on the substitution
       }
 
-      if outcome_from_prob(5.0){
-        println!("{}", "shd i sub".to_string());
+      if outcome_from_prob(6.0){
         let i1: usize = damn_should_i_sub(&away_on_court, &box_score_away);
         let mut i2;
         if outcome_from_prob(40.0){
@@ -279,6 +411,8 @@ fn my_custom_command() -> Result<String, String> {
         }
         // println!("{} {}", i1, i2);
         away.swap(i1, i2)
+
+        // here update the team ratings based on the substitution
       }
 
 
@@ -302,11 +436,23 @@ fn my_custom_command() -> Result<String, String> {
   
   // print_type_of(f.unwrap());
   let mut file = File::create("test.txt");
-  serde_json::to_writer(file.unwrap(), &box_score_home);
+  // serde_json::to_writer(file.unwrap(), &box_score_home);
 
   println!("I was invoked from JS!");
 
-  Ok("worked".into())
+  let home_score: Vec<box_score_entry> = box_score_home.into_iter()
+                        .map(|(_id, score)| score)
+                        .collect();
+
+  let away_score: Vec<box_score_entry> = box_score_away.into_iter()
+                                        .map(|(_id, score)| score)
+                                        .collect();
+
+  // Ok("worked".into())
+
+
+  // println!("{}", all_scores[0].name);
+  (home_score, away_score)
 }
 
 fn main() {
@@ -335,23 +481,34 @@ fn get_possession_length(home_on_court:&[&Player], away_on_court:&[&Player]) -> 
   let mut home_pace = 0.0;
   let mut away_pace = 0.0;
   for o in home_on_court {
-    home_pace += o.stl_100.parse::<f32>().unwrap()
+    home_pace += o.stl_100
   }
   for o in away_on_court {
-    away_pace += o.stl_100.parse::<f32>().unwrap()
+    away_pace += o.stl_100
   }
 
-  let a: f32 = rand::thread_rng().gen_range(3..15) as f32;
+  let a: f32 = rand::thread_rng().gen_range(9..19) as f32;
 
   // println!("{}", home_on_court[1].fta_100);
   // println!("{}", away_on_court[1].fta_100);
 
+  println!("{}", home_pace - away_pace + a);
+
   return (home_pace - away_pace + a) as i32;
 }
 
-// fn sim_turnover(home_on_court: &[&Player], away_on_court: &[&Player]){
+fn sim_turnover(home_on_court: &[&Player], away_on_court: &[&Player]) -> (bool, i32) {
 
-// }
+  let o_turnover: f32 = home_on_court.iter().map(|player| player.tov_100 as f32).collect::<Vec<f32>>().into_iter().sum::<f32>();
+  let d_turnover: f32 = away_on_court.iter().map(|player| player.stl_100 as f32).collect::<Vec<f32>>().into_iter().sum::<f32>();
+  
+  let turnover_odds: f32 = (o_turnover + d_turnover) / 1.2;
+
+  let tov = outcome_from_prob(turnover_odds);
+
+
+  (tov, 2)
+}
 
 
 fn print_type_of<T>(_: &T) {
@@ -438,16 +595,27 @@ struct Outcome {
 fn half_court_possession(offense: &[&Player], defense: &[&Player]) -> Outcome {
 
   let ind: usize = get_player(offense);
-
+  let mut to: bool;
+  let mut to_player_ind: i32; 
+  (to, to_player_ind) = sim_turnover(offense, defense);
+  if to {
+    return Outcome {
+      player_index: ind,
+      shot_type: 0,
+      points: 0,
+      // possession_time: 0
+    }
+  }
   let shot_type = get_shot_type(offense[ind].fga_100, offense[ind].fg3a_100);
 
   let mut points = 0;
 
-  if shot_type == 2{
+  if shot_type == 2 {
     if outcome_from_prob(offense[ind].fg2){
       points = 2
     }
   } else {
+    println!("{}", offense[ind].fg3);
     if outcome_from_prob(offense[ind].fg3){
       points = 3
     }
@@ -473,8 +641,9 @@ fn half_court_possession(offense: &[&Player], defense: &[&Player]) -> Outcome {
   //   return (ind, 0)
   // }
 
-  
 }
+
+
 
 fn start_possession(offense: &[&Player], defense: &[&Player]) -> (i32, Outcome) {
   // println!("{}", "HERE");
@@ -552,7 +721,7 @@ pub struct Player {
   #[serde(rename = "Experience")]
   pub experience: String,
   #[serde(rename = "DPM")]
-  pub dpm: String,
+  pub dpm: f32,
   #[serde(rename = "DPM Improvement")]
   pub dpm_improvement: String,
   #[serde(rename = "O-DPM")]
@@ -594,11 +763,11 @@ pub struct Player {
   #[serde(rename = "Blk%")]
   pub blk: String,
   #[serde(rename = "Stl/100")]
-  pub stl_100: String,
+  pub stl_100: f32,
   #[serde(rename = "Stl%")]
   pub stl: String,
   #[serde(rename = "Tov/100")]
-  pub tov_100: String,
+  pub tov_100: f32,
 }
 
 
