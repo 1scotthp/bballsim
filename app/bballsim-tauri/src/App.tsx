@@ -10,6 +10,9 @@ import { invoke } from "@tauri-apps/api/tauri";
 
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
+
+import { appDir, join } from "@tauri-apps/api/path";
+import { convertFileSrc } from "@tauri-apps/api/tauri";
 // With the Tauri global script, enabled when `tauri.conf.json > build > withGlobalTauri` is set to true:
 // const invoke = window.__TAURI__.invoke
 
@@ -58,7 +61,18 @@ class box_score_entry {
   }
 }
 
+
 function App() {
+
+  const appDirPath = appDir().then((appDir) => {
+    const filePath = join(appDir, "assets/video.mp4").then((p) => {
+      const assetUrl = convertFileSrc(p);
+      console.log("PPP");
+    });
+  });
+
+
+
   const [homeTeamName, setHomeTeamName] = useState<String>("Utah Jazz");
   const [awayTeamName, setawayTeamName] = useState<String>("Milwaukee Bucks");
   const [home, setHome] = useState<box_score_entry[]>([]);
@@ -134,28 +148,32 @@ function App() {
   const divider = away.map((player) => <p>|</p>);
 
   const runGame = () => {
+    console.log("NAMES", homeTeamName, awayTeamName);
+    alert(homeTeamName);
+    alert(awayTeamName);
     invoke("my_custom_command", {
       team1: homeTeamName,
       team2: awayTeamName,
-    }).then((message: any) => {
-      setHome(
-        message[0].sort(
-          (a: box_score_entry, b: box_score_entry) => b.sec - a.sec
-        )
-      );
-      setAway(
-        message[1].sort(
-          (a: box_score_entry, b: box_score_entry) => b.sec - a.sec
-        )
-      );
-    }).catch((e) => {
-      console.log(e)
     });
+    // .then((message: any) => {
+    //   setHome(
+    //     message[0].sort(
+    //       (a: box_score_entry, b: box_score_entry) => b.sec - a.sec
+    //     )
+    //   );
+    //   setAway(
+    //     message[1].sort(
+    //       (a: box_score_entry, b: box_score_entry) => b.sec - a.sec
+    //     )
+    //   );
+    // }).catch((e) => {
+    //   console.log(e)
+    // });
   };
 
   const options = [
     "Phoenix Suns",
-    "Milwaukee Bucks",
+    // "Milwaukee Bucks",
     "Dallas Mavericks",
     "Utah Jazz",
     "Memphis Grizzlies",
@@ -174,7 +192,7 @@ function App() {
       {/* <div>
         {Object.keys(b)[0]}
         </div> */}
-      <body>
+      <div>
         <Dropdown
           options={options}
           onChange={(name) => {
@@ -184,10 +202,10 @@ function App() {
           value={defaultOption}
           placeholder="Select an option"
         />
-        <button onClick={runGame}>New Game</button>
+        <button onClick={() => runGame()}>New Game</button>
 
         <div style={{ display: "flex", flexDirection: "row", padding: 20 }}>
-        home {" "}
+          home{" "}
           {home
             .map((player) => player.pts)
             .reduce((accumulator, current) => {
@@ -219,20 +237,19 @@ function App() {
               );
             })}
           </table>
-          away {" "}
+          away{" "}
           {away
             .map((player) => player.pts)
             .reduce((accumulator, current) => {
               return accumulator + current;
             }, 0)}
           <table style={{ padding: 20 }}>
-
-              <th>Name</th>
-              <th>Min</th>
-              <th>Pts</th>
-              <th>FG</th>
-              <th>3FG</th>
-              <th>TO</th>
+            <th>Name</th>
+            <th>Min</th>
+            <th>Pts</th>
+            <th>FG</th>
+            <th>3FG</th>
+            <th>TO</th>
 
             {away.map((val, key) => {
               return (
@@ -251,9 +268,6 @@ function App() {
               );
             })}
           </table>
-
-          
-        
         </div>
 
         {/* <div style={{ display: "flex", flexDirection: "row" }}>
@@ -301,7 +315,7 @@ function App() {
           <ul>{awayNames}</ul>
           <ul>{awayMins}</ul>
         </div> */}
-      </body>
+      </div>
     </div>
   );
 }

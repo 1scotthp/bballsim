@@ -63,6 +63,8 @@ dependencies = [
  "serde_json",
  "tauri",
  "tauri-build",
+ "tauri_includedir",
+ "tauri_includedir_codegen",
  "weighted_rand",
 ]
 
@@ -2747,12 +2749,13 @@ dependencies = [
 
 [[package]]
 name = "tauri-build"
-version = "1.0.0-rc.10"
+version = "1.0.0-rc.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "08486bbcae11faef73a8ca6f0d57a269089c584462582d70f6a971ac1213c7b6"
+checksum = "ab213cbd01c1d4bd31620f23b00f42690bd988864953069eae2bd91b7d3fdfd5"
 dependencies = [
  "anyhow",
  "cargo_toml",
+ "heck 0.4.0",
  "semver 1.0.9",
  "serde_json",
  "tauri-utils",
@@ -2855,6 +2858,27 @@ dependencies = [
  "serde_with",
  "thiserror",
  "url",
+ "walkdir",
+]
+
+[[package]]
+name = "tauri_includedir"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "641bcf0882809f9a4a680cb840652e9773b3c91a4c16f67a1b734234b99d1888"
+dependencies = [
+ "flate2",
+ "phf 0.8.0",
+]
+
+[[package]]
+name = "tauri_includedir_codegen"
+version = "0.6.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "52ad6473c9808411d47982d2e611126bc87d1d3899739858145be713271940b0"
+dependencies = [
+ "flate2",
+ "phf_codegen",
  "walkdir",
 ]
 
