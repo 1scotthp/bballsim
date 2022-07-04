@@ -1,6 +1,9 @@
 
 use std::fs;
 use std::time::Instant;
+use rand::distributions::{Distribution, Uniform};
+
+mod cap;
 
 
 // #![cfg_attr(
@@ -25,13 +28,121 @@ struct box_score_entry {
   min: i32
 }
 
+// for each play type need a TS / eFG
+// struct play_type_effectiveness {
+//   play: String,
+//   3Pfr: f32,
+//   2Pfr: f32,
+//   TOVfr: f32,
+//   FTr: f32,
+// }
+
+
+// 1. call randomizer with play_type_freq list to get index -- use usize type for indices
+// 2. use same index to check play_type_info_arr
+// 3. using shot type freq arr call randomizer to get index
+// 4. check same index of play_type_effectiveness to get eFG
+// 5. apply team transformation to eFG
+// 6. get outcome
+
+
+
+
+
+
+// this function takes in a standard array and returns the 3 different kinds
+// fn gen_freq_arrays () -> {
+  
+// }
+
+// 0 - 3Pfr
+// 1 - 2Pfr
+// 2 - TOVfr
+// 3 - 
+// [[.2, .3, .4, .1], [.2, .3, .4, .1]] //array of frequency arrays
+
+
+// GIVEN A FREQ ARRAY GENERATE THE 3 ARRAYS 
+// ONCE PER GAME
+// 0 - iso
+// 1 - pnr
+// 2 - transition
+// [.2, .3, .5] // frequency array < 8 seconds
+// [.2, .4, .4] // frequency array > 8 seconds
+// [.2, .4, .4] // after offensive rebound
+
+
+
+// [25, 35, 34]
+//ASSIGN INFO, FREQ ARRAY INDICES TO PLAY TYPES. shd be the same
+
+// THESE ARE CALCULATED ONCE PER GAME
+// independent of team factors
+struct Player_ratings {
+  pace: f32,
+  ast: f32,
+  dreb: f32, 
+  oreb: f32,
+  usg: f32,
+  threePr: f32,
+  three: f32,
+  twoPr: f32,
+  two: f32,
+  FTr: f32,
+  FT: f32,
+  TOr: f32,
+  off_ball: f32,
+
+  def: f32,
+  rim_def: f32,
+  to_def: f32,
+  FTr_def: f32,
+  blk: f32,
+
+  //this is actually 3 arrays will change later
+  // play_type_freq_list: f32[], //[.3, .2, .3, .1, 0, 0] shd sum to 1
+  // play_type_rating: f32[],
+  // play_type_info_arr: [f32[]], // subarrays should sum to 1
+  // 3Pr_def: f32,
+}
+
+
+// THESE ARE RECALCULATED EACH TIME THERE IS A SUBSTITUTION
+struct team_boosts {
+  // off_play_type_mod
+  // def_play_type_mod
+  // 3Pr_def: f32,
+  off_ball: f32, // avg of Player off ball minus league avg
+  two_def: f32, // boosts efg on 2s
+  to_def: f32, //  boosts to likelihood
+  FTr_def: f32, // boosts likelihood of ft
+}
+
+// THESE ARE RECALCULATED EACH TIME THERE IS A SUBSTITUTION
+struct team_ratings {
+  oreb: f32,
+  dreb: f32,
+  pace: f32,
+}
+
+
+// THESE ARE CONSTANT
+struct league_rates {
+  oreb: f32,
+  two_def: f32,
+  to_def: f32,
+  FTr_def: f32,
+}
+
+// having chris paul on your team makes mikal bridges turn the ball over less
+// we have to have a lot of these better if they're not to big
+// the bballgm version of this class has only 8 fields all integers or decimals
+
 
 
 fn outcome_from_prob (prob: f32) -> bool {
   let num = rand::thread_rng().gen_range(0..100) as f32;
-
   return prob > num
-  // println!("{}", num);
 }
 
 
@@ -41,27 +152,33 @@ use priority_queue::PriorityQueue;
 
 
 
+
+
+
+
 // PRIORITY QUEUE
+
+// something with penalty for MP, overall rating, 
 fn damn_should_i_sub(on_court: &[&Player], box_score: &HashMap<String, box_score_entry>) -> usize{
 
-  // iterate over all players on both teams, -> give them a court score. swap by name?
+  // iterate over all Players on both teams, -> give them a court score. swap by name?
 
   // let mut court_scores: HashMap<&String, f32> = HashMap::new();
   let mut ratings: PriorityQueue<usize, i32> = PriorityQueue::new();
 
 
-  // - (box_score[&player.player].sec / 20 ) as f32 
+  // - (box_score[&Player.Player].sec / 20 ) as f32 
 
   let mut i = 0;
-  for player in on_court {
-    // println!("{} {}", player.player, (- player.dpm as f32 - player.usg / 2.0 as f32) as i32 + 20 + box_score[&player.player].sec);
+  for Player in on_court {
+    // println!("{} {}", Player.Player, (- Player.dpm as f32 - Player.usg / 2.0 as f32) as i32 + 20 + box_score[&Player.Player].sec);
 
-    ratings.push(i, ((player.dpm * -2.0 - player.usg) as i32 + i32::pow(box_score[&player.player].sec / 60, 2))/3 as i32);
+    ratings.push(i, ((Player.dpm * -2.0 - Player.usg) as i32 + i32::pow(box_score[&Player.Player].sec / 60, 2))/3 as i32);
 
     i+=1
   }
 
-  // // player who might be subbed is at the top
+  // // Player who might be subbed is at the top
   // println!("{} {}", on_court[*ratings.peek().unwrap().0], ratings.peek().unwrap().1);
 
   let ind = ratings.peek().unwrap().0;
@@ -69,13 +186,13 @@ fn damn_should_i_sub(on_court: &[&Player], box_score: &HashMap<String, box_score
   *ind
 
   // for (key, val) in box_score_home {
-  //   // println!("{}", player);
+  //   // println!("{}", Player);
   //   // court_scores.insert(key, val.sec as f32);
   //   home_on_court.push(key, 20 - val.sec/60 + val.pts);
   // }
 
   // for (key, val) in box_score_away {
-  //   // println!("{}", player);
+  //   // println!("{}", Player);
   //   // court_scores.insert(key, val.sec as f32);
   //   away_on_court.push(key, 20 - val.sec/60 + val.pts);
   // }
@@ -100,14 +217,14 @@ fn damn_should_i_sub(on_court: &[&Player], box_score: &HashMap<String, box_score
   //   }
   // }
 
-  // println!("{} {} {}", box_score_home[&home[0].player].sec, home[1], court_scores[0])
+  // println!("{} {} {}", box_score_home[&home[0].Player].sec, home[1], court_scores[0])
 
 }
 
 // HashMap<String, box_score_entry>
 
 
-struct player_score {
+struct Player_score {
   score: f32
 }
 
@@ -117,58 +234,118 @@ struct team_score {
 
 //(Vec<box_score_entry>, Vec<box_score_entry>)
 
+use std::time::Duration;
+use std::thread::sleep;
+
+// mod playtype_data;
+
+
+
+use csv::{Reader, StringRecord, Writer, Error};
+
+/// Internal data set to make aggregation simpler
+#[derive(Debug)]
+struct DataSet {
+    /// Header row of CSV file
+    headers: StringRecord,
+
+    /// Records from CSV file
+    records: Vec<StringRecord>,
+}
+
+
+/// Reads csv data from a file and returns a DataSet
+fn read_from_file(path: &str) -> Result<DataSet, Box<Error>> {
+  let mut reader = Reader::from_path(path)?;
+
+  let headers = reader.headers()?.clone();
+
+  let records = reader
+      .records()
+      .collect::<Result<Vec<StringRecord>, csv::Error>>()?;
+
+  Ok(DataSet { headers, records })
+}
+
 
 #[tauri::command]
 fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec<box_score_entry>){
 
   
 
+  cap::main();
+  // playtype_data::gen_data();
   println!("{}", "COMMAND22".to_string());
 
 
   
-  let data = fs::read_to_string("src/darko.json").unwrap();
+  // this needs to come from an api I think
+  // maybe write it to a file
+  let data = fs::read_to_string("darko.json").unwrap();
+
+
+  // let time = Duration::from_secs(5);
+  //  sleep(time);
     // println!("{}", data);
 
 
   // fs::write("f.json", data).expect("Unable to write file");
 
+    // let iso = read_from_file("master.csv");
+    // for row in &iso {
+    //     println!("{}", row)
+    //     // playtype_dict.insert(row.Player, Vec::new().push(row.rating))
+    // }
+
 
   let d: HashMap<String, Player> = serde_json::from_str(&data).unwrap();
 
-  // print!("{:?}", &d);
+  let mut play_freq: HashMap<String, [f32; 4]> = HashMap::new();
+  let mut play_rating: HashMap<String, [f32; 4]> = HashMap::new();
 
-  // hashmap with all the players on the 2 teams playing each other
+
+  // here construct 2 hashmaps from d
+  // 1. player name to frequency array
+  // 2. player name to rating array
+  for (i, player) in d.iter() {
+
+    let freq = [player.iso_freq, player.transition_freq, player.pnr_freq, player.pnr_roller_freq];
+    let rating = [player.iso_per, player.transition_per, player.pnr_per, player.pnr_roller_per];
+    play_freq.insert(player.Player.clone(), freq);
+    play_rating.insert(player.Player.clone(), rating);
+  }
+
+
+  // hashmap with all the Players on the 2 teams playing each other
   // maybe add box score stuff to this also
-  // let mut playersInGame: HashMap<String, &Player> = HashMap::new();
+  // let mut PlayersInGame: HashMap<String, &Player> = HashMap::new();
 
 
   let mut home: Vec<&Player> = Vec::new();
   let mut away: Vec<&Player> = Vec::new();
-  for (i, player) in d.iter(){
-    if player.team == team1 {
-      home.push(player);
+  // let mut play_freq_game: HashMap<String, [f32; 4]> = HashMap::new();
+  // let mut play_rating_game: HashMap<String, [f32; 4]> = HashMap::new();
 
-    } else if player.team == team2 {
-      away.push(player);
-      println!("{}", away.len())
+  for (i, Player) in d.iter(){
+    if Player.team == team1 {
+      home.push(Player);
+
+    } else if Player.team == team2 {
+      away.push(Player);
     }
   }
-
 
   home.sort_by(|a, b| a.dpm.partial_cmp(&b.dpm).unwrap().reverse());
   away.sort_by(|a, b| a.dpm.partial_cmp(&b.dpm).unwrap().reverse());
 
 
-
-
   let mut box_score_home: HashMap<String, box_score_entry> = HashMap::with_capacity(15);
   let mut box_score_away: HashMap<String, box_score_entry> = HashMap::with_capacity(15);
   
-  for player in &home {
-    let a = player.player.clone();
+  for Player in &home {
+    let a = Player.Player.clone();
     box_score_home.insert(a.clone(), {box_score_entry {
-      dpm: player.dpm,
+      dpm: Player.dpm,
       name: a,
       pts: 0,
       fgm: 0,
@@ -184,11 +361,11 @@ fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec
     }});
   }
 
-  for player in &away {
-    let a = player.player.clone();
+  for Player in &away {
+    let a = Player.Player.clone();
 
     box_score_away.insert(a.clone(), {box_score_entry{
-      dpm: player.dpm,
+      dpm: Player.dpm,
       name: a, 
       pts: 0,
       fgm: 0,
@@ -214,50 +391,45 @@ fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec
 
   // let (court, bench) = home.split_array_mut::<5>();
 
-  
-
-
-
   let mut timeleft = 720;
   let mut quarter = 1;
 
   let mut possession: i8 = 0;
   let mut possession_time: i32 = 0;
   let mut outcome: Outcome;
-  let mut player: usize;
-
-
+  let mut Player: usize;
 
   let start = Instant::now();
-  //ratings for each player should be processed into what is useable here
+  //ratings for each Player should be processed into what is useable here
 
   while quarter < 5 {
     while timeleft > 0 {
-     
       let home_on_court = &home[0 .. 5];
       let away_on_court =  &away[0 .. 5];
 
-      if possession == 0 {
-        (possession_time, outcome) = start_possession(&home_on_court, &away_on_court);
 
-        let player_name = &home_on_court[outcome.player_index].player;
+
+      if possession == 0 {
+        (possession_time, outcome) = start_possession(&home_on_court, &away_on_court, &play_freq, &play_rating);
+
+        let Player_name = &home_on_court[outcome.Player_index].Player;
 
         if outcome.shot_type == 2 {
           if outcome.points > 0{
-            if let Some(x) = box_score_home.get_mut(player_name){
+            if let Some(x) = box_score_home.get_mut(Player_name){
               x.fga += 1;
               x.fgm += 1
 
             }
           } else {
-            if let Some(x) = box_score_home.get_mut(player_name){
+            if let Some(x) = box_score_home.get_mut(Player_name){
               x.fga += 1;
             }
 
           }
         } else if outcome.shot_type == 3 {
           if outcome.points > 0{
-            if let Some(x) = box_score_home.get_mut(player_name){
+            if let Some(x) = box_score_home.get_mut(Player_name){
               x.fg3a += 1;
               x.fg3m += 1;
               x.fgm += 1;
@@ -265,66 +437,64 @@ fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec
 
             }
           } else {
-            if let Some(x) = box_score_home.get_mut(player_name){
+            if let Some(x) = box_score_home.get_mut(Player_name){
               x.fg3a += 1;
               x.fga += 1
             }
 
           }
         } else if outcome.shot_type == 0 {
-          if let Some(x) = box_score_home.get_mut(player_name){
+          if let Some(x) = box_score_home.get_mut(Player_name){
             x.tov += 1;
           }
 
-          if let Some(x) = box_score_away.get_mut(player_name){
+          if let Some(x) = box_score_away.get_mut(Player_name){
             x.stl += 1;
           }
 
         }
+        // let entry = box_score_home.get_mut(Player_name);
 
-
-        // let entry = box_score_home.get_mut(player_name);
-
-        if let Some(x) = box_score_home.get_mut(player_name){
+        if let Some(x) = box_score_home.get_mut(Player_name){
           x.pts += outcome.points;
         }
 
 
         // better way to do this is only when there is a sub, incremement minutes
-        for player in home_on_court{
-          if let Some(x) = box_score_home.get_mut(&player.player){
+        for Player in home_on_court{
+          if let Some(x) = box_score_home.get_mut(&Player.Player){
             x.sec += possession_time
           }
         }
 
-        for player in away_on_court{
-          if let Some(x) = box_score_away.get_mut(&player.player){
+        for Player in away_on_court{
+          if let Some(x) = box_score_away.get_mut(&Player.Player){
             x.sec += possession_time
           }
         }
 
         // entry.pts += 3;
 
-        // println!("player {} {}", home_on_court[player], box_score_home[player_name].pts);
-        // box_score_home[player].pts += 3;
+        // println!("Player {} {}", home_on_court[Player], box_score_home[Player_name].pts);
+        // box_score_home[Player].pts += 3;
         
         possession = 1;
       }
       else {
-        (possession_time, outcome) = start_possession(&away_on_court, &home_on_court);
+        (possession_time, outcome) = start_possession(&home_on_court, &away_on_court, &play_freq, &play_rating);
 
 
-        let player_name = &away_on_court[outcome.player_index].player;
+        let Player_name = &away_on_court[outcome.Player_index].Player;
 
 
         if outcome.shot_type == 2 {
           if outcome.points > 0{
-            if let Some(x) = box_score_away.get_mut(player_name){
+            if let Some(x) = box_score_away.get_mut(Player_name){
               x.fga += 1;
               x.fgm += 1
             }
           } else {
-            if let Some(x) = box_score_away.get_mut(player_name){
+            if let Some(x) = box_score_away.get_mut(Player_name){
               x.fga += 1;
             }
 
@@ -333,51 +503,48 @@ fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec
  
         } else if outcome.shot_type == 3 {
           if outcome.points > 0{
-            if let Some(x) = box_score_away.get_mut(player_name){
+            if let Some(x) = box_score_away.get_mut(Player_name){
               x.fg3a += 1;
               x.fg3m += 1;
               x.fgm += 1;
               x.fga += 1;
             }
           } else {
-            if let Some(x) = box_score_away.get_mut(player_name){
+            if let Some(x) = box_score_away.get_mut(Player_name){
               x.fg3a += 1;
               x.fga += 1;
             }
 
           }
         } else if outcome.shot_type == 0 {
-          if let Some(x) = box_score_away.get_mut(player_name){
+          if let Some(x) = box_score_away.get_mut(Player_name){
             x.tov += 1;
           }
 
-          if let Some(x) = box_score_home.get_mut(player_name){
+          if let Some(x) = box_score_home.get_mut(Player_name){
             x.stl += 1;
           }
 
         }
-
-
-
-        if let Some(x) = box_score_away.get_mut(player_name){
+        if let Some(x) = box_score_away.get_mut(Player_name){
           x.pts += outcome.points;
         }
 
-        for player in home_on_court{
-          if let Some(x) = box_score_home.get_mut(&player.player){
+        for Player in home_on_court{
+          if let Some(x) = box_score_home.get_mut(&Player.Player){
             x.sec += possession_time
           }
         }
 
-        for player in away_on_court{
-          if let Some(x) = box_score_away.get_mut(&player.player){
+        for Player in away_on_court{
+          if let Some(x) = box_score_away.get_mut(&Player.Player){
             x.sec += possession_time
           }
         }
 
-        // box_score_away[player_name].pts += 3;
+        // box_score_away[Player_name].pts += 3;
 
-        // box_score_away[player].pts += 3;
+        // box_score_away[Player].pts += 3;
         possession = 0
       }
       // should subtract possession time
@@ -489,26 +656,25 @@ fn get_possession_length(home_on_court:&[&Player], away_on_court:&[&Player]) -> 
     away_pace += o.stl_100
   }
 
-  let a: f32 = rand::thread_rng().gen_range(9..19) as f32;
 
-  // println!("{}", home_on_court[1].fta_100);
-  // println!("{}", away_on_court[1].fta_100);
-
+  // full league possession distribution
+  // adjust for pace 
+  // // adjust for how previous possession ended
+  let a: f32 = rand::thread_rng().gen_range(2..24) as f32;
 
   return (home_pace - away_pace + a) as i32;
 }
 
-fn sim_turnover(home_on_court: &[&Player], away_on_court: &[&Player]) -> (bool, i32) {
+fn sim_turnover(home_on_court: &[&Player], away_on_court: &[&Player]) -> (bool, usize) {
 
-  let o_turnover: f32 = home_on_court.iter().map(|player| player.tov_100 as f32).collect::<Vec<f32>>().into_iter().sum::<f32>();
-  let d_turnover: f32 = away_on_court.iter().map(|player| player.stl_100 as f32).collect::<Vec<f32>>().into_iter().sum::<f32>();
+  let o_turnover: f32 = home_on_court.iter().map(|Player| Player.tov_100 as f32).collect::<Vec<f32>>().into_iter().sum::<f32>();
+  let d_turnover: f32 = away_on_court.iter().map(|Player| Player.stl_100 as f32).collect::<Vec<f32>>().into_iter().sum::<f32>();
   
   let turnover_odds: f32 = (o_turnover + d_turnover) / 1.2;
-
   let tov = outcome_from_prob(turnover_odds);
 
 
-  (tov, 2)
+  (tov, rand::thread_rng().gen_range(0..4) as usize)
 }
 
 
@@ -521,8 +687,6 @@ use weighted_rand::builder::*;
 // println!("{:?}", result);
 
 fn get_index_from_stat(odds_vec: [f32; 5]) -> usize {
- 
-
   // for odds in odds_vec{
   //   println!("odds {}", odds)
   // }
@@ -555,18 +719,37 @@ fn get_index_from_stat(odds_vec: [f32; 5]) -> usize {
 
 }
 
+fn outcome_from_arr(probs: Vec<f32>) -> usize{
+  let between = Uniform::from(0..100);
+  let mut rng = rand::thread_rng();
+  let mut sum = 0;
+  let num = between.sample(&mut rng);
+  let mut index = 0;
 
-// mostly working for getting player name
-fn get_player(offensive_players: &[&Player]) -> usize {
+  for i in probs {
+      sum += i as i32;
+      if sum > num{
+        return index
+      }
+      index+=1 
+  }
+  return index - 1
+  // println!("{}", sum);
+
+}
+
+
+// mostly working for getting Player name
+fn get_Player(offensive_Players: &[&Player]) -> usize {
 
   // let mut odds_vec: [f32; 5] = [0.0,0.0,0.0,0.0,0.0];
-  // for player in rangeoffensive_players{
-  //   odds_vec.push(player.usg)
+  // for Player in rangeoffensive_Players{
+  //   odds_vec.push(Player.usg)
   // }
   let mut odds_vec: [f32; 5] = [0.0,0.0,0.0,0.0,0.0];
   let mut i = 0;
   while i < 5{
-    odds_vec[i] = offensive_players[i].usg;
+    odds_vec[i] = offensive_Players[i].usg;
     i+=1
   }
 
@@ -587,45 +770,75 @@ fn get_shot_type(fga: f32, fg3a: f32) -> i32 {
 
 
 struct Outcome {
-  player_index: usize,
+  Player_index: usize,
   shot_type: i32,
   points: i32,
   // possession_time: i32,
 }
 
-fn half_court_possession(offense: &[&Player], defense: &[&Player]) -> Outcome {
 
-  let ind: usize = get_player(offense);
+
+fn half_court_possession(offense: &[&Player], defense: &[&Player], play_freq: &HashMap<String, [f32; 4]>, play_rating: &HashMap<String, [f32; 4]>) -> Outcome {
+
+  
   let mut to: bool;
-  let mut to_player_ind: i32; 
-  (to, to_player_ind) = sim_turnover(offense, defense);
-  if to {
-    return Outcome {
-      player_index: ind,
-      shot_type: 0,
-      points: 0,
-      // possession_time: 0
-    }
-  }
+  let mut to_Player_ind: usize; 
+
+
+  // for (key, value) in play_freq.iter(){
+  //   println!("{} {}", key, value[0])
+  // }
+
+
+  // (to, to_Player_ind) = sim_turnover(offense, defense);
+  // if to {
+  //   return Outcome {
+  //     Player_index: to_Player_ind,
+  //     shot_type: 0,
+  //     points: 0,
+  //     // possession_time: 0
+  //   }
+  // }
+
+  //get the player's index
+  let ind: usize = get_Player(offense);
+
+  //get play frequency
+  let f = play_freq.get(&offense[ind].Player).unwrap();
+
+  //get play index 0 is iso etc
+  let play_index = outcome_from_arr(f.to_vec());
+  
+  //get players rating array
+  // println!("HIHI");
+  // for (i, r) in play_rating {
+  //   println!("HIHI {} {}", i, r[0]);
+  // }
+  let rating = play_rating.get(&offense[ind].Player).unwrap()[play_index];
+
+  // println!("{} {} {}", &offense[ind].Player, rating, play_index);
+  // println!("{} {} {}", &offense[ind].Player, rating, play_index);
+
   let shot_type = get_shot_type(offense[ind].fga_100, offense[ind].fg3a_100);
 
   let mut points = 0;
 
   if shot_type == 2 {
-    if outcome_from_prob(offense[ind].fg2){
+    if outcome_from_prob(offense[ind].fg2 + rating/10.0 + 5.0){
       points = 2
     }
   } else {
-  
-    if outcome_from_prob(offense[ind].fg3){
+    if outcome_from_prob(offense[ind].fg3 + rating/10.0 + 5.0){
       points = 3
     }
   }
 
+
+
   // println!(" shot {}", points);
 
   return Outcome {
-    player_index: ind,
+    Player_index: ind,
     shot_type: shot_type,
     points: points,
     // possession_time: 0
@@ -645,27 +858,45 @@ fn half_court_possession(offense: &[&Player], defense: &[&Player]) -> Outcome {
 }
 
 
+// use team reb ratings and league avg to gen outcome
+// gen Player based on reb/100
+fn sim_rebound(home_on_court: &[&Player], away_on_court: &[&Player], shot_type: i32) -> (bool, i32) {
+  let o_rebound: f32 = home_on_court.iter().map(|Player| Player.reb_100 as f32).collect::<Vec<f32>>().into_iter().sum::<f32>();
+  let d_rebound: f32 = away_on_court.iter().map(|Player| Player.reb_100 as f32).collect::<Vec<f32>>().into_iter().sum::<f32>();
+  let d_rebound_odds = 75.0 + o_rebound - d_rebound;
+  let d_reb = outcome_from_prob(d_rebound_odds);
 
-fn start_possession(offense: &[&Player], defense: &[&Player]) -> (i32, Outcome) {
+  (d_reb, 2)
+}
+
+
+
+fn start_possession(offense: &[&Player], defense: &[&Player], play_freq: &HashMap<String, [f32; 4]>, play_rating: &HashMap<String, [f32; 4]>) -> (i32, Outcome) {
   // println!("{}", "HERE");
   let mut possession_time = get_possession_length(offense, defense);
 
   // println!("{}", offense[1]);
 
-  let mut outcome: Outcome = half_court_possession(offense, defense);
+  let mut outcome: Outcome = half_court_possession(offense, defense, play_freq, play_rating);
+
+  // if outcome.shot_type == 2 || outcome.shot_type == 3{
+  //   sim_rebound(home_on_court, away_on_court, shot_type);
+  // }
+
+  // need to be able to have multiple outcomes in the case that theres offensive rebounds
 
   // outcome.possession_time = possession_time
 
   (possession_time, outcome)
-  // (possession_time, outcome.player_index, outcome.shot_type)
+  // (possession_time, outcome.Player_index, outcome.shot_type)
 }
 
 // how to print dictionary
 impl std::fmt::Display for Dictionary {
   fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
     // print!("{}", self.inner)
-    for (s, player) in &self.inner {
-      println!("{}", &player);
+    for (s, Player) in &self.inner {
+      println!("{}", &Player);
     }
     // println!("{}", self.inner);
     write!(f, "{}", "A")
@@ -679,8 +910,8 @@ impl std::fmt::Display for Dictionary {
   
 //   fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
 //     // print!("{}", self.inner)
-//     for (s, player) in &self.inner {
-//       println!("{}", &player);
+//     for (s, Player) in &self.inner {
+//       println!("{}", &Player);
 //     }
 //     // println!("{}", self.inner);
 //     write!(f, "{}", "A")
@@ -688,14 +919,14 @@ impl std::fmt::Display for Dictionary {
 
 // }
 
-// fn get_real_players(team1: &str, team2: &str) -> HashMap<String, &Player> {
+// fn get_real_Players(team1: &str, team2: &str) -> HashMap<String, &Player> {
 
   
 
-//   // for (i, player) in d.iter(){
-//   //   if player.team == team2 {
-//   //     // println!("{}", player.team);
-//   //     away.insert(player.player.to_string(), player);
+//   // for (i, Player) in d.iter(){
+//   //   if Player.team == team2 {
+//   //     // println!("{}", Player.team);
+//   //     away.insert(Player.Player.to_string(), Player);
 //   //   }
 //   // }
 
@@ -703,7 +934,7 @@ impl std::fmt::Display for Dictionary {
 //   return home
 
 
-//   // need to get correct players from the dictionary
+//   // need to get correct Players from the dictionary
 
 
 //   // println!("{:?}", serde_json::to_string(&a));
@@ -718,7 +949,7 @@ pub struct Player {
   #[serde(rename = "Team")]
   pub team: String,
   #[serde(rename = "Player")]
-  pub player: String,
+  pub Player: String,
   #[serde(rename = "Experience")]
   pub experience: String,
   #[serde(rename = "DPM")]
@@ -754,13 +985,13 @@ pub struct Player {
   #[serde(rename = "Usg%")]
   pub usg: f32,
   #[serde(rename = "Reb/100")]
-  pub reb_100: String,
+  pub reb_100: f32,
   #[serde(rename = "Ast/100")]
   pub ast_100: String,
   #[serde(rename = "Ast%")]
   pub ast: String,
   #[serde(rename = "Blk/100")]
-  pub blk_100: String,
+  pub blk_100: f32,
   #[serde(rename = "Blk%")]
   pub blk: String,
   #[serde(rename = "Stl/100")]
@@ -769,15 +1000,32 @@ pub struct Player {
   pub stl: String,
   #[serde(rename = "Tov/100")]
   pub tov_100: f32,
+  #[serde(rename = "iso_FREQ")]
+  pub iso_freq: f32,
+  #[serde(rename = "iso_PERCENTILE")]
+  pub iso_per: f32,
+  #[serde(rename = "transition_FREQ")]
+  pub transition_freq: f32,
+  #[serde(rename = "transition_PERCENTILE")]
+  pub transition_per: f32,
+  #[serde(rename = "pnr_handler_FREQ")]
+  pub pnr_freq: f32,
+  #[serde(rename = "pnr_handler_PERCENTILE")]
+  pub pnr_per: f32,
+  #[serde(rename = "pnr_roller_FREQ")]
+  pub pnr_roller_freq: f32,
+  #[serde(rename = "pnr_roller_PERCENTILE")]
+  pub pnr_roller_per: f32,
+  
 }
 
 
 
-// how to print player
+// how to print Player
 impl std::fmt::Display for Player {
   fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
     // println!("HI");
-    write!(f, "{}", self.player)
+    write!(f, "{}", self.Player)
     // write!(f, "{}", self.team);
 }
 }

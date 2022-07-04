@@ -23,7 +23,7 @@ import { convertFileSrc } from "@tauri-apps/api/tauri";
 
 // }, [])
 
-// this object should be a player box score entry type like in rust. need to also include names
+// this object should be a Player box score entry type like in rust. need to also include names
 
 class box_score_entry {
   name: string;
@@ -124,29 +124,29 @@ function App() {
 
   // setb(b.sort((a: box_score_entry, b: box_score_entry) => a.sec > b.sec ? a.sec : b.sec));
 
-  const homeFg = home.map((player) => (
+  const homeFg = home.map((Player) => (
     <p>
-      {player.fgm} - {player.fga}
+      {Player.fgm} - {Player.fga}
     </p>
   ));
 
-  const homeFg3a = home.map((player) => <p>{player.fg3a}</p>);
+  const homeFg3a = home.map((Player) => <p>{Player.fg3a}</p>);
 
-  const homePts = home.map((player) => <p>{player.pts}</p>);
+  const homePts = home.map((Player) => <p>{Player.pts}</p>);
 
-  const homeNames = home.map((player) => <p>{player.name}</p>);
+  const homeNames = home.map((Player) => <p>{Player.name}</p>);
 
-  const homeMins = home.map((player) => <p>{Math.round(player.sec / 60)}</p>);
+  const homeMins = home.map((Player) => <p>{Math.round(Player.sec / 60)}</p>);
 
-  const awayFga = home.map((player) => <p>{player.fga}</p>);
+  const awayFga = home.map((Player) => <p>{Player.fga}</p>);
 
-  const awayPts = away.map((player) => <p>{player.pts}</p>);
+  const awayPts = away.map((Player) => <p>{Player.pts}</p>);
 
-  const awayNames = away.map((player) => <p>{player.name}</p>);
+  const awayNames = away.map((Player) => <p>{Player.name}</p>);
 
-  const awayMins = away.map((player) => <p>{Math.round(player.sec / 60)}</p>);
+  const awayMins = away.map((Player) => <p>{Math.round(Player.sec / 60)}</p>);
 
-  const divider = away.map((player) => <p>|</p>);
+  const divider = away.map((Player) => <p>|</p>);
 
   const runGame = () => {
     console.log("NAMES", homeTeamName, awayTeamName);
@@ -206,11 +206,11 @@ function App() {
 
         <div style={{ display: "flex", flexDirection: "row", padding: 20 }}>
           home{" "}
-          {home
-            .map((player) => player.pts)
+          {Math.round(home
+            .map((Player) => Player.pts)
             .reduce((accumulator, current) => {
               return accumulator + current;
-            }, 0)}
+            }, 0))}
           <table style={{ padding: 20 }}>
             <tr>
               <th>Name</th>
@@ -225,7 +225,7 @@ function App() {
                 <tr key={key}>
                   <td>{val.name}</td>
                   <td>{Math.round(val.sec / 60)}</td>
-                  <td>{val.pts}</td>
+                  <td>{Math.round(val.pts)}</td>
                   <td>
                     {val.fgm} - {val.fga}
                   </td>
@@ -239,7 +239,7 @@ function App() {
           </table>
           away{" "}
           {away
-            .map((player) => player.pts)
+            .map((Player) => Player.pts)
             .reduce((accumulator, current) => {
               return accumulator + current;
             }, 0)}

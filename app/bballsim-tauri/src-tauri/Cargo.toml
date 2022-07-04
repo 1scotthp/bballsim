@@ -18,10 +18,12 @@ tauri_includedir = "0.6.1"
 
 
 [dependencies]
+rusty-money = "0.4.1"
+csv = "1.1.6"
 serde_json = "1.0"
 tauri_includedir_codegen = "0.6.3"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.0.0-rc.12", features = ["api-all"] }
+tauri = { version = "1.0.0-rc.12", features = ["api-all", "devtools"] }
 rand = "0.8.5"
 weighted_rand = "0.3"
 priority-queue = "1.2.2"

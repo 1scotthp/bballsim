@@ -1,0 +1,562 @@
+Player,Age,zero,one,two,three,four,five,Signed,Guaranteed,Team
+Bradley Beal,29,"$33,724,200","$37,262,300",,,,,Cap Space,"$33,724,200",Wizards
+Kristaps Porziņģis,26,"$31,650,600","$33,833,400","$36,016,200",,,,Bird Rights,"$65,484,000",Wizards
+Kentavious Caldwell-Pope,29,"$13,038,862","$14,004,703",,,,,Early Bird,"$17,926,980",Wizards
+Kyle Kuzma,26,"$13,000,000","$13,000,000","$13,000,000",,,,Bird,"$26,000,000",Wizards
+Thomas Bryant,24,"$8,666,667",,,,,,Early Bird Rights,"$8,666,667",Wizards
+Rui Hachimura,24,"$4,916,160","$6,263,188",,,,,1st Round Pick,"$11,179,348",Wizards
+Deni Avdija,21,"$4,692,840","$4,916,160","$6,263,188",,,,1st Round Pick,"$9,609,000",Wizards
+Ish Smith,33,"$4,500,000","$4,725,000",,,,,Room Exception,"$4,500,000",Wizards
+Corey Kispert,23,"$3,383,640","$3,552,960","$3,722,040","$5,705,887",,,1st Round Pick,"$6,936,600",Wizards
+Raul Neto,30,"$2,089,448",,,,,,Minimum Salary,"$2,089,448",Wizards
+Daniel Gafford,23,"$1,782,621","$1,930,681","$12,402,000","$13,394,160","$14,386,320",,Minimum Salary,"$43,895,782",Wizards
+Anthony Gill,29,"$1,517,981",,,,,,Minimum Salary,"$1,517,981",Wizards
+Vernon Carey Jr.,21,"$1,517,981","$1,782,621","$1,930,681",,,,Cap Space,"$3,300,602",Wizards
+Isaiah Todd,20,"$1,500,000","$1,563,518","$1,836,096","$1,988,598",,,MLE,"$4,899,614",Wizards
+Tomáš Satoranský,30,"$468,119",,,,,,Minimum Salary,"$468,119",Wizards
+Jordan Schakel,24,,,,,,,Two-Way Contract,"$53,176",Wizards
+Cassius Winston,24,,,,,,,Two-Way Contract,,Wizards
+Rudy Gobert,30,"$35,344,828","$38,172,414","$41,000,000","$43,827,587","$46,655,173",,Bird,"$158,344,829",Jazz
+Donovan Mitchell,25,"$28,103,500","$30,351,780","$32,600,060","$34,848,340","$37,096,620",,Bird,"$125,903,680",Jazz
+Mike Conley,34,"$21,000,000","$22,680,000","$24,360,000",,,,Bird,"$58,000,000",Jazz
+Bojan Bogdanović,33,"$18,502,000","$19,343,000",,,,,Cap Space,"$37,845,000",Jazz
+Jordan Clarkson,30,"$12,420,000","$13,340,000","$14,260,000",,,,Bird,"$25,760,000",Jazz
+Royce O'Neale,29,"$8,800,000",,,,,,Cap space,"$8,800,000",Jazz
+Rudy Gay,35,"$5,890,000","$6,184,500","$6,479,000",,,,Mini MLE,"$12,074,500",Jazz
+Nickeil Alexander-Walker,23,"$3,261,480","$5,009,633",,,,,1st Round Pick,"$8,271,113",Jazz
+Hassan Whiteside,33,"$2,401,537",,,,,,Minimum Salary,"$2,401,537",Jazz
+Udoka Azubuike,22,"$2,075,880","$2,174,880","$3,923,484",,,,1st Round Pick,"$4,250,760",Jazz
+Eric Paschall,25,"$1,782,621",,,,,,MLE,"$1,782,621",Jazz
+Jared Butler,21,"$925,258","$1,563,518",,,,,Minimum Salary,"$2,488,776",Jazz
+Danuel House Jr.,29,"$657,596",,,,,,Minimum Salary,"$991,967",Jazz
+Trent Forrest,24,"$8,558",,,,,,Minimum Salary,"$8,558",Jazz
+Xavier Sneed,24,,,,,,,Two-Way Contract,,Jazz
+Pascal Siakam,28,"$33,003,936","$35,448,672","$37,893,408",,,,1st Round pick,"$106,346,016",Raptors
+Fred VanVleet,28,"$19,675,926","$21,250,000","$22,824,074",,,,Bird,"$40,925,926",Raptors
+OG Anunoby,24,"$16,071,429","$17,357,143","$18,642,857","$19,928,571",,,Bird,"$52,071,429",Raptors
+Gary Trent Jr.,23,"$16,000,000","$17,280,000","$18,560,000",,,,Bird,"$33,280,000",Raptors
+Thaddeus Young,34,"$14,190,000",,,,,,Cap space,"$14,190,000",Raptors
+Scottie Barnes,20,"$7,280,400","$7,644,600","$8,008,680","$10,130,980",,,1st Round Pick,"$14,925,000",Raptors
+Chris Boucher,29,"$7,020,000",,,,,,Early Bird,"$7,020,000",Raptors
+Khem Birch,29,"$6,350,000","$6,667,750","$6,985,000",,,,MLE,"$20,002,750",Raptors
+Precious Achiuwa,22,"$2,711,280","$2,840,160","$4,379,527",,,,1st Round Pick,"$5,551,440",Raptors
+Malachi Flynn,24,"$2,048,040","$2,145,720","$3,873,025",,,,1st Round Pick,"$4,193,760",Raptors
+Yuta Watanabe,27,"$1,762,796",,,,,,Minimum Salary,"$1,762,796",Raptors
+Isaac Bonga,22,"$1,729,217",,,,,,Minimum Salary,"$1,729,217",Raptors
+Svi Mykhailiuk,25,"$1,729,217","$1,878,720",,,,,Minimum Salary,"$3,607,937",Raptors
+Dalano Banton,22,"$925,258","$1,563,518",,,,,Minimum Salary,"$925,258",Raptors
+Armoni Brooks,24,"$250,000","$1,752,638",,,,,Minimum Salary,"$471,156",Raptors
+Justin Champagnie,21,,,,,,,Two-Way Contract,,Raptors
+David Johnson,21,,,,,,,Two-Way Contract,,Raptors
+Drew Eubanks,25,"$1,762,796",,,,,,,"$1,762,796",Raptors
+Sam Dekker,28,"$350,000",,,,,,,"$350,000",Raptors
+Dejounte Murray,25,"$15,428,880",,,,,,1st Round pick,"$15,428,880",Spurs
+Doug McDermott,30,"$13,750,000","$13,750,000","$13,750,000",,,,Sign and Trade,"$41,250,000",Spurs
+Josh Richardson,28,"$11,615,328","$12,196,094",,,,,Minimum Salary,"$23,811,422",Spurs
+Jakob Poeltl,26,"$8,750,000","$9,398,148",,,,,Bird,"$18,148,148",Spurs
+Zach Collins,24,"$7,000,000","$7,350,000","$7,700,000",,,,Cap Space,"$14,350,000",Spurs
+Lonnie Walker IV,23,"$4,447,896",,,,,,1st Round Pick,"$4,447,896",Spurs
+Devin Vassell,21,"$4,235,160","$4,437,000","$5,887,899",,,,1st Round Pick,"$8,672,160",Spurs
+Joshua Primo,19,"$3,946,800","$4,144,320","$4,341,600","$5,982,725",,,1st Round Pick,"$8,091,120",Spurs
+Romeo Langford,22,"$3,804,360","$5,634,257",,,,,1st Round Pick,"$9,438,617",Spurs
+Keldon Johnson,22,"$2,145,720","$3,873,025",,,,,1st Round Pick,"$6,018,745",Spurs
+Keita Bates-Diop,26,"$1,729,217","$1,878,720",,,,,Minimum Salary,"$1,729,217",Spurs
+Tre Jones,22,"$1,517,981","$1,782,621",,,,,MLE,"$1,517,981",Spurs
+Jock Landale,26,"$925,258",,,,,,Minimum Salary,"$925,258",Spurs
+Devontae Cacok,25,"$364,533",,,,,,Minimum Salary,"$364,533",Spurs
+Joe Wieskamp,22,"$202,068",,,,,,Minimum Salary,"$202,068",Spurs
+D. J. Stewart Jr.,22,,,,,,,Two-Way Contract,,Spurs
+Robert Woodard II,22,,,,,,,Two-Way Contract,,Spurs
+Goran Dragić,36,"$18,620,165",,,,,,,"$18,620,165",Spurs
+Tomáš Satoranský,30,"$9,531,881",,,,,,,"$9,531,881",Spurs
+DeMarre Carroll,35,"$1,242,340",,,,,,,"$1,242,340",Spurs
+De'Aaron Fox,24,"$28,103,500","$30,351,780","$32,600,060","$34,848,340","$37,096,620",,Bird,"$163,000,300",Kings
+Harrison Barnes,30,"$20,284,091","$18,352,273",,,,,Bird Rights,"$38,636,364",Kings
+Domantas Sabonis,26,"$18,500,000","$18,500,000","$19,400,000",,,,1st Round pick,"$56,400,000",Kings
+Jeremy Lamb,30,"$10,500,000",,,,,,Cap Space,"$10,500,000",Kings
+Richaun Holmes,28,"$10,384,500","$11,215,260","$12,046,020","$12,876,780",,,Early Bird,"$33,645,780",Kings
+Justin Holiday,33,"$6,006,420","$6,292,440",,,,,Non Bird,"$12,298,860",Kings
+Josh Jackson,25,"$5,005,350",,,,,,Room Exception,"$5,005,350",Kings
+Donte DiVincenzo,25,"$4,675,830",,,,,,1st Round Pick,"$4,675,830",Kings
+Davion Mitchell,23,"$4,603,200","$4,833,600","$5,063,640","$6,451,077",,,1st Round Pick,"$9,436,800",Kings
+Maurice Harkless,29,"$4,347,600","$4,564,980",,,,,Non Bird,"$8,912,580",Kings
+Terence Davis,25,"$4,000,000","$4,000,000",,,,,Early Bird,"$8,000,000",Kings
+Alex Len,29,"$3,732,000","$3,918,600",,,,,Bi-Annual Exception,"$7,650,600",Kings
+Trey Lyles,26,"$2,500,000","$2,625,000",,,,,Cap Space,"$5,125,000",Kings
+Damian Jones,27,"$1,977,011",,,,,,Minimum Salary,"$1,977,011",Kings
+Chimezie Metu,25,"$1,762,796","$1,910,860",,,,,MLE,"$3,673,656",Kings
+Neemias Queta,22,,,,,,,Two-Way Contract,,Kings
+Jahmi'us Ramsey,21,"$1,517,981",,,,,,,"$1,517,981",Kings
+Robert Woodard II,22,"$1,517,981",,,,,,,"$1,517,981",Kings
+Damian Lillard,31,"$39,344,900","$42,492,492","$45,640,084","$48,787,676",,,1st Round Pick,"$176,265,152",Trail Blazers
+Eric Bledsoe,32,"$18,125,000","$19,375,000",,,,,Bird Rights,"$22,025,000",Trail Blazers
+Joe Ingles,34,"$12,436,364",,,,,,Bird Rights,"$12,436,364",Trail Blazers
+Josh Hart,27,"$12,000,000","$12,960,000","$12,960,000",,,,Bird,"$12,000,000",Trail Blazers
+Jusuf Nurkić,27,"$12,000,000",,,,,,Bird Rights,"$12,000,000",Trail Blazers
+Anfernee Simons,23,"$3,938,818",,,,,,1st Round Pick,"$3,938,818",Trail Blazers
+Justise Winslow,26,"$3,902,439","$4,097,561",,,,,Mini MLE,"$8,000,000",Trail Blazers
+Keon Johnson,20,"$2,553,240","$2,681,040","$2,808,720","$4,474,291",,,1st Round Pick,"$5,234,280",Trail Blazers
+Ben McLemore,29,"$2,389,641",,,,,,Minimum Salary,"$2,389,641",Trail Blazers
+Nassir Little,22,"$2,316,240","$4,171,548",,,,,1st Round Pick,"$6,487,788",Trail Blazers
+Didi Louzada,23,"$1,786,878","$1,876,222","$1,965,566","$2,057,646",,,Non Bird,"$3,663,100",Trail Blazers
+CJ Elleby,22,"$1,517,981",,,,,,Minimum Salary,"$1,517,981",Trail Blazers
+Elijah Hughes,24,"$1,517,981",,,,,,Minimum Salary,"$1,517,981",Trail Blazers
+Greg Brown III,20,"$925,258","$1,563,518","$1,836,096",,,,Mini MLE,"$2,488,776",Trail Blazers
+Trendon Watford,21,"$436,482","$1,563,518","$1,836,096","$1,988,598",,,MLE,"$5,824,694",Trail Blazers
+Keljin Blevins,26,,,,,,,Two-Way Contract,,Trail Blazers
+Brandon Williams,22,,,,,,,Two-Way Contract,"$53,176",Trail Blazers
+Andrew Nicholson,32,"$2,844,430","$2,844,430","$2,844,430",,,,,"$8,533,290",Trail Blazers
+Cody Zeller,29,"$2,389,641",,,,,,,"$2,389,641",Trail Blazers
+Dennis Smith Jr.,24,"$1,789,256",,,,,,,"$1,789,256",Trail Blazers
+Devin Booker,25,"$31,650,600","$33,833,400","$36,016,200",,,,1st round pick,"$101,500,200",Suns
+Chris Paul,37,"$30,800,000","$28,400,000","$30,800,000","$30,000,000",,,Bird,"$75,000,000",Suns
+Deandre Ayton,23,"$12,632,950",,,,,,1st Round Pick,"$12,632,950",Suns
+Jae Crowder,31,"$9,720,900","$10,183,800",,,,,MLE,"$19,904,700",Suns
+Dario Šarić,28,"$8,510,000","$9,240,000",,,,,Bird,"$17,750,000",Suns
+Cameron Payne,27,"$6,500,000","$6,000,000","$6,500,000",,,,Early Bird,"$14,500,000",Suns
+Mikal Bridges,25,"$5,557,725","$20,089,286","$21,696,429","$23,303,571","$24,910,714",,1st Round Pick,"$95,557,725",Suns
+JaVale McGee,34,"$5,000,000",,,,,,MLE,"$5,000,000",Suns
+Torrey Craig,31,"$4,878,049","$5,121,951",,,,,MLE,"$10,000,000",Suns
+Cameron Johnson,26,"$4,437,000","$5,887,899",,,,,1st Round Pick,"$10,324,899",Suns
+Aaron Holiday,25,"$3,980,551",,,,,,1st Round Pick,"$3,980,551",Suns
+Landry Shamet,25,"$3,768,342","$9,598,214","$10,366,071","$11,133,929","$11,901,786",,1st Round Pick,"$46,768,342",Suns
+Elfrid Payton,28,"$2,239,544",,,,,,Minimum Salary,"$2,239,544",Suns
+Bismack Biyombo,29,"$1,366,392",,,,,,Minimum Salary,"$1,518,213",Suns
+Ish Wainright,27,"$8,558",,,,,,Minimum Salary,"$8,558",Suns
+Gabriel Lundberg,27,,,,,,,Two-Way Contract,,Suns
+Frank Kaminsky,29,"$2,089,448",,,,,,,"$2,089,448",Suns
+Abdel Nader,28,"$2,000,000",,,,,,,"$2,000,000",Suns
+Tobias Harris,29,"$35,995,950","$37,633,050","$39,270,150",,,,Bird Rights,"$112,899,150",76ers
+Joel Embiid,28,"$31,579,390","$33,616,770","$43,732,500","$47,231,100","$50,729,700","$54,228,300",1st Round Pick,"$206,889,460",76ers
+Danny Green,35,"$10,000,000",,,,,,Early Bird,"$10,000,000",76ers
+Furkan Korkmaz,24,"$4,629,630","$5,000,000","$5,370,370",,,,Bird,"$15,000,000",76ers
+Georges Niang,29,"$3,300,000","$3,465,000",,,,,MLE,"$6,765,000",76ers
+Matisse Thybulle,25,"$2,840,160","$4,379,527",,,,,1st Round Pick,"$7,219,687",76ers
+Paul Millsap,37,"$2,641,691",,,,,,Minimum Salary,"$2,641,691",76ers
+Tyrese Maxey,21,"$2,602,920","$2,726,880","$4,343,920",,,,1st Round Pick,"$5,329,800",76ers
+Jaden Springer,19,"$2,023,680","$2,125,200","$2,226,240","$4,018,363",,,1st Round Pick,"$4,148,880",76ers
+Shake Milton,25,"$1,846,738","$1,997,718",,,,,Cap Space,"$3,844,456",76ers
+Isaiah Joe,23,"$1,517,981","$1,782,621",,,,,MLE,"$1,517,981",76ers
+Paul Reed,23,"$1,517,981","$1,782,621",,,,,Minimum Salary,"$1,517,981",76ers
+Charles Bassey,21,"$925,258","$1,563,518","$1,836,096",,,,MLE,"$1,000,000",76ers
+DeAndre Jordan,33,"$592,103",,,,,,Minimum Salary,"$592,103",76ers
+Charlie Brown Jr.,25,,,,,,,Minimum Salary,"$95,930",76ers
+Myles Powell,24,,,,,,,Two-Way Contract,,76ers
+Gary Harris,27,"$20,482,143",,,,,,1st Round Pick,"$20,482,143",Magic
+Jonathan Isaac,24,"$17,400,000","$17,400,000","$17,400,000","$17,400,000",,,Bird,"$40,800,000",Magic
+Markelle Fultz,24,"$16,500,000","$16,500,000","$17,000,000",,,,Bird,"$35,000,000",Magic
+Terrence Ross,31,"$12,500,000","$11,500,000",,,,,Bird Rights,"$24,000,000",Magic
+Mo Bamba,24,"$7,568,742",,,,,,1st Round Pick,"$7,568,742",Magic
+Wendell Carter Jr.,23,"$6,920,027","$14,150,000","$13,050,000","$11,950,000","$10,850,000",,1st Round Pick,"$56,920,027",Magic
+Jalen Suggs,21,"$6,592,920","$6,922,320","$7,252,080","$9,188,385",,,1st Round Pick,"$13,515,240",Magic
+Franz Wagner,20,"$5,007,840","$5,258,280","$5,508,720","$7,007,092",,,1st Round Pick,"$10,266,120",Magic
+Robin Lopez,34,"$5,000,000",,,,,,MLE,"$5,000,000",Magic
+Cole Anthony,22,"$3,449,400","$3,613,680","$5,539,771",,,,1st Round Pick,"$7,063,080",Magic
+Chuma Okeke,23,"$3,277,080","$3,433,320","$5,266,713",,,,1st Round Pick,"$6,710,400",Magic
+R.J. Hampton,21,"$2,303,040","$2,412,840","$4,220,057",,,,1st Round Pick,"$4,715,880",Magic
+Bol Bol,22,"$2,161,152",,,,,,MLE,"$2,161,152",Magic
+Moritz Wagner,25,"$1,729,217","$1,878,720",,,,,Minimum Salary,"$1,729,217",Magic
+Devin Cannady,26,"$100,000","$1,752,638","$1,902,137",,,,MLE,"$185,578",Magic
+Ignas Brazdeikis,23,,,,,,,Two-Way Contract,,Magic
+Admiral Schofield,25,,,,,,,Two-Way Contract,"$171,156",Magic
+Timofey Mozgov,35,"$5,573,334",,,,,,,"$5,573,334",Magic
+Michael Carter-Williams,30,"$3,300,000",,,,,,,"$3,300,000",Magic
+E'Twaun Moore,33,"$2,641,691",,,,,,,"$2,641,691",Magic
+PJ Dozier,25,"$1,910,860",,,,,,,"$1,910,860",Magic
+Derrick Favors,30,"$9,720,900","$10,183,800",,,,,MLE,"$19,904,700",Thunder
+Josh Giddey,19,"$5,988,000","$6,287,400","$6,587,040","$8,352,367",,,1st Round Pick,"$12,275,400",Thunder
+Shai Gilgeous-Alexander,23,"$5,495,532","$29,750,000","$32,130,000","$34,510,000","$36,890,000","$39,270,000",1st Round Pick,"$178,045,532",Thunder
+Mike Muscala,31,"$3,500,000","$3,500,000",,,,,MLE,"$3,500,000",Thunder
+Aleksej Pokusevski,20,"$3,113,160","$3,261,480","$5,009,633",,,,1st Round Pick,"$6,374,640",Thunder
+Tre Mann,21,"$2,901,240","$3,046,200","$3,191,280","$4,908,189",,,1st Round Pick,"$5,947,440",Thunder
+Darius Bazley,22,"$2,513,040","$4,264,629",,,,,1st Round Pick,"$6,777,669",Thunder
+Ty Jerome,24,"$2,412,840","$4,220,057",,,,,1st Round Pick,"$6,632,897",Thunder
+Kenrich Williams,27,"$2,000,000","$2,000,000",,,,,Sign and Trade,"$2,000,000",Thunder
+Jeremiah Robinson-Earl,21,"$2,000,000","$2,000,000","$1,900,000","$1,988,598",,,MLE,"$4,000,000",Thunder
+Théo Maledon,21,"$2,000,000","$1,900,000","$1,930,681",,,,MLE,"$2,000,000",Thunder
+Luguentz Dort,23,"$1,782,621","$1,930,681",,,,,Minimum Salary,"$1,807,621",Thunder
+Isaiah Roby,24,"$1,782,621","$1,930,681",,,,,MLE,"$3,713,302",Thunder
+Aaron Wiggins,23,"$1,000,000","$1,563,518","$1,836,096","$1,988,598",,,Cap Space,"$1,000,000",Thunder
+Vit Krejci,22,"$925,258","$1,563,518","$1,836,096","$1,988,598",,,MLE,"$1,707,017",Thunder
+Melvin Frazier,25,,,,,,,Minimum Salary,,Thunder
+Lindy Waters III,24,,,,,,,Two-Way Contract,,Thunder
+KZ Okpala,23,"$1,782,621",,,,,,,"$1,782,621",Thunder
+Gabriel Deck,27,"$1,690,507",,,,,,,"$1,690,507",Thunder
+Kyle Singler,34,"$999,200","$999,200",,,,,,"$1,998,400",Thunder
+Miye Oni,24,"$51,225",,,,,,,"$51,225",Thunder
+Julius Randle,27,"$19,800,000","$23,760,000","$25,660,800","$27,561,600","$29,462,400",,Cap Space,"$96,782,400",Knicks
+Evan Fournier,29,"$17,142,857","$18,000,000","$18,857,143","$19,000,000",,,Sign and Trade,"$73,000,000",Knicks
+Derrick Rose,33,"$13,445,120","$14,520,730","$15,596,339",,,,Early Bird,"$27,965,850",Knicks
+Alec Burks,30,"$9,536,000","$10,012,800","$10,489,600",,,,Cap Space,"$19,548,800",Knicks
+Nerlens Noel,28,"$8,800,000","$9,240,000","$9,680,000",,,,Cap Space,"$18,040,000",Knicks
+Kemba Walker,32,"$8,729,020",,,,,,Cap Space,"$8,729,020",Knicks
+RJ Barrett,22,"$8,623,920","$10,900,635",,,,,1st Round Pick,"$19,524,555",Knicks
+Obi Toppin,24,"$5,105,160","$5,348,280","$6,803,012",,,,1st Round Pick,"$10,453,440",Knicks
+Taj Gibson,37,"$4,910,000","$5,155,500",,,,,Room Exception,"$4,910,000",Knicks
+Cam Reddish,22,"$4,670,160","$5,954,454",,,,,1st Round Pick,"$10,624,614",Knicks
+Immanuel Quickley,23,"$2,210,640","$2,316,240","$4,171,548",,,,1st Round Pick,"$4,526,880",Knicks
+Quentin Grimes,22,"$2,168,760","$2,277,000","$2,385,720","$4,296,682",,,1st Round Pick,"$4,445,760",Knicks
+Mitchell Robinson,24,"$1,802,057",,,,,,MLE,"$1,802,057",Knicks
+Miles McBride,21,"$925,258","$1,563,518","$1,836,096",,,,Cap Space,"$2,488,776",Knicks
+Ryan Arcidiacono,28,"$586,136",,,,,,Minimum Salary,"$791,798",Knicks
+Feron Hunt,22,,,,,,,Two-Way Contract,,Knicks
+Jericho Sims,23,,,,,,,Two-Way Contract,,Knicks
+Joakim Noah,37,"$6,431,666",,,,,,,"$6,431,666",Knicks
+Solomon Hill,31,"$2,389,641",,,,,,,"$2,389,641",Knicks
+Wayne Selden,27,"$785,102",,,,,,,"$785,102",Knicks
+CJ McCollum,30,"$30,864,198","$33,333,333","$35,802,469",,,,1st Round Pick,"$100,000,000",Pelicans
+Brandon Ingram,24,"$29,467,800","$31,650,600","$33,833,400","$36,016,200",,,Bird,"$130,968,000",Pelicans
+Jonas Valančiūnas,30,"$14,000,000","$14,700,000","$15,435,000",,,,Bird Rights,"$44,135,000",Pelicans
+Devonte' Graham,27,"$11,000,000","$11,550,000","$12,100,000","$12,650,000",,,Sign and Trade,"$37,500,000",Pelicans
+Zion Williamson,21,"$10,733,400","$13,534,817",,,,,1st Round Pick,"$10,733,400",Pelicans
+Larry Nance Jr.,29,"$10,690,909","$9,672,727",,,,,1st Round pick,"$20,363,636",Pelicans
+Jaxson Hayes,22,"$5,348,280","$6,803,012",,,,,1st Round Pick,"$12,151,292",Pelicans
+Garrett Temple,36,"$4,910,000","$5,155,500","$5,401,000",,,,Sign and Trade,"$10,065,500",Pelicans
+Kira Lewis Jr.,21,"$3,822,240","$4,004,280","$5,722,116",,,,1st Round Pick,"$7,826,520",Pelicans
+Trey Murphy III,22,"$3,053,760","$3,206,640","$3,359,280","$5,159,854",,,1st Round Pick,"$6,260,400",Pelicans
+Tony Snell,30,"$2,389,641",,,,,,Minimum Salary,"$2,389,641",Pelicans
+Willy Hernangómez,28,"$2,327,220","$2,443,581","$2,559,942",,,,Non Bird,"$4,770,801",Pelicans
+Herbert Jones,23,"$1,700,000","$1,785,000","$1,836,096",,,,MLE,"$3,485,000",Pelicans
+Naji Marshall,24,"$1,517,981","$1,782,621","$1,930,681",,,,MLE,"$1,517,981",Pelicans
+Jose Alvarado,24,"$1,500,000","$1,563,518","$1,836,096","$1,988,598",,,MLE,"$3,063,518",Pelicans
+Gary Clark,27,"$377,645",,,,,,,"$377,645",Pelicans
+Jared Harper,24,,,,,,,Two-Way Contract,"$95,930",Pelicans
+Karl-Anthony Towns,26,"$31,650,600","$33,833,400","$36,016,200",,,,1st Round Pick,"$101,500,200",Timberwolves
+D'Angelo Russell,26,"$30,013,500","$31,377,750",,,,,Sign and Trade,"$61,391,250",Timberwolves
+Malik Beasley,25,"$14,391,964","$15,458,035","$16,524,106",,,,Bird,"$29,849,999",Timberwolves
+Patrick Beverley,33,"$14,320,988","$13,000,000",,,,,Bird Rights,"$27,320,988",Timberwolves
+Taurean Prince,28,"$13,000,000","$7,692,308","$8,307,692",,,,1st Round pick,"$29,000,000",Timberwolves
+Anthony Edwards,20,"$10,245,480","$10,733,400","$13,534,817",,,,1st Round Pick,"$20,978,880",Timberwolves
+Josh Okogie,23,"$4,087,904",,,,,,1st Round Pick,"$4,087,904",Timberwolves
+Jarred Vanderbilt,23,"$4,000,000","$4,320,000","$4,640,000",,,,Bird,"$8,620,000",Timberwolves
+Jake Layman,28,"$3,940,184",,,,,,Sign and Trade,"$3,940,184",Timberwolves
+Leandro Bolmaro,21,"$2,353,320","$2,471,160","$2,588,400","$4,392,515",,,1st Round Pick,"$4,824,480",Timberwolves
+Jaden McDaniels,21,"$2,063,280","$2,161,440","$3,901,399",,,,1st Round Pick,"$4,224,720",Timberwolves
+Jordan McLaughlin,26,"$2,000,000","$2,160,000","$2,320,000",,,,Early Bird,"$4,160,000",Timberwolves
+Jaylen Nowell,22,"$1,782,621","$1,930,681",,,,,MLE,"$1,782,621",Timberwolves
+Naz Reid,22,"$1,782,621","$1,930,681",,,,,MLE,"$1,782,621",Timberwolves
+Greg Monroe,32,"$55,208",,,,,,Minimum Salary,"$193,227",Timberwolves
+Nathan Knight,24,,,,,,,Two-Way Contract,,Timberwolves
+McKinley Wright IV,23,,,,,,,Two-Way Contract,,Timberwolves
+Giannis Antetokounmpo,27,"$39,344,970","$42,492,568","$45,640,165","$48,787,763","$51,935,360",,Bird,"$176,265,466",Bucks
+Khris Middleton,30,"$35,500,000","$37,948,276","$40,396,552",,,,Bird Rights,"$73,448,276",Bucks
+Jrue Holiday,32,"$30,133,333","$32,393,333","$34,653,333","$36,913,333",,,Bird,"$97,179,999",Bucks
+Brook Lopez,34,"$13,302,325","$13,906,976",,,,,Cap Space,"$27,209,301",Bucks
+Serge Ibaka,32,"$9,720,900",,,,,,MLE,"$9,720,900",Bucks
+Pat Connaughton,29,"$5,333,333","$5,728,395",,,,,Early Bird,"$11,061,728",Bucks
+Bobby Portis,27,"$4,347,600","$4,564,980",,,,,Non Bird,"$4,347,600",Bucks
+Grayson Allen,26,"$4,054,695","$8,500,000","$8,500,000",,,,1st Round Pick,"$21,054,695",Bucks
+George Hill,36,"$4,000,000","$4,000,000",,,,,MLE,"$8,000,000",Bucks
+Wesley Matthews,35,"$1,958,501",,,,,,Minimum Salary,"$1,958,501",Bucks
+Thanasis Antetokounmpo,29,"$1,729,217","$1,878,720",,,,,Minimum Salary,"$3,607,937",Bucks
+Jordan Nwora,23,"$1,517,981",,,,,,Minimum Salary,"$1,517,981",Bucks
+Jevon Carter,26,"$457,149",,,,,,Minimum Salary,"$457,149",Bucks
+Luca Vildoza,26,"$51,347","$1,752,638",,,,,Minimum Salary,"$51,347",Bucks
+Rayjon Tucker,24,"$28,779","$1,815,677","$1,968,182",,,,MLE,"$28,779",Bucks
+Lindell Wigginton,24,,,,,,,Two-Way Contract,,Bucks
+Sandro Mamukelashvili,23,,,,,,,Two-Way Contract,,Bucks
+Jon Leuer,33,"$3,169,347",,,,,,,"$3,169,347",Bucks
+Larry Sanders,33,"$1,865,547",,,,,,,"$1,865,547",Bucks
+DeMarcus Cousins,31,"$607,285",,,,,,,"$607,285",Bucks
+DeAndre' Bembry,27,"$601,867",,,,,,,"$601,867",Bucks
+Georgios Kalaitzakis,23,"$462,629",,,,,,,"$462,629",Bucks
+Jimmy Butler,32,"$36,016,200","$37,653,300","$45,183,960","$48,798,677","$52,413,394",,Sign and Trade,"$167,652,137",Heat
+Bam Adebayo,24,"$28,103,550","$30,351,834","$32,600,118","$34,848,402","$37,096,686",,Bird,"$163,000,590",Heat
+Kyle Lowry,36,"$26,984,128","$28,333,334","$29,682,540",,,,Bird,"$85,000,002",Heat
+Duncan Robinson,28,"$15,560,000","$16,902,000","$18,154,000","$19,406,000","$19,888,000",,Bird,"$79,910,000",Heat
+P.J. Tucker,37,"$7,000,000","$7,350,000",,,,,MLE,"$7,000,000",Heat
+Tyler Herro,22,"$4,004,280","$5,722,116",,,,,1st Round Pick,"$9,726,396",Heat
+Udonis Haslem,42,"$2,641,691",,,,,,Minimum Salary,"$2,641,691",Heat
+Markieff Morris,32,"$2,641,691",,,,,,Minimum Salary,"$2,641,691",Heat
+Dewayne Dedmon,32,"$2,389,641",,,,,,Minimum Salary,"$2,389,641",Heat
+Victor Oladipo,30,"$2,389,641",,,,,,Minimum Salary,"$2,389,641",Heat
+Gabe Vincent,26,"$1,669,178","$1,815,677",,,,,Minimum Salary,"$1,669,178",Heat
+Max Strus,26,"$1,669,178","$1,815,677",,,,,Minimum Salary,"$1,669,178",Heat
+Omer Yurtseven,24,"$1,489,065","$1,752,638",,,,,Minimum Salary,"$1,489,065",Heat
+Caleb Martin,26,"$527,615",,,,,,Minimum Salary,"$527,615",Heat
+Haywood Highsmith,25,"$290,967","$1,752,638","$1,902,137",,,,MLE,"$547,701",Heat
+Javonte Smart,23,,,,,,,Two-Way Contract,,Heat
+Mychal Mulder,28,,,,,,,Two-Way Contract,,Heat
+Ryan Anderson,34,"$5,214,584",,,,,,,"$5,214,584",Heat
+Steven Adams,28,"$17,073,171","$17,926,829",,,,,1st Round Pick,"$35,000,000",Grizzlies
+Dillon Brooks,26,"$12,200,000","$11,400,000",,,,,MLE,"$23,600,000",Grizzlies
+Kyle Anderson,28,"$9,937,150",,,,,,MLE,"$9,937,150",Grizzlies
+Ja Morant,22,"$9,603,360","$12,119,440",,,,,1st Round Pick,"$21,722,800",Grizzlies
+Jaren Jackson Jr.,22,"$9,180,560","$23,437,500","$25,312,500","$27,187,500","$29,062,500",,1st Round Pick,"$114,180,560",Grizzlies
+De'Anthony Melton,24,"$8,805,976",,,,,,Early Bird,"$8,805,976",Grizzlies
+Tyus Jones,26,"$7,600,000",,,,,,MLE,"$7,600,000",Grizzlies
+Jarrett Culver,23,"$6,395,160","$8,109,063",,,,,1st Round Pick,"$6,395,160",Grizzlies
+Ziaire Williams,20,"$4,373,160","$4,591,920","$4,810,200","$6,133,005",,,1st Round Pick,"$8,965,080",Grizzlies
+Brandon Clarke,25,"$2,726,880","$4,343,920",,,,,1st Round Pick,"$7,070,800",Grizzlies
+John Konchar,26,"$2,200,000","$2,300,000","$2,400,000",,,,MLE,"$3,040,000",Grizzlies
+Desmond Bane,24,"$2,033,160","$2,130,240","$3,845,083",,,,1st Round Pick,"$4,163,400",Grizzlies
+Santi Aldama,21,"$1,994,520","$2,094,240","$2,194,200","$3,960,531",,,1st Round Pick,"$4,088,760",Grizzlies
+Killian Tillie,24,"$1,901,625","$1,901,625",,,,,Room Exception,"$3,803,250",Grizzlies
+Xavier Tillman Sr.,23,"$1,517,981","$1,782,621","$1,930,681",,,,MLE,"$3,300,602",Grizzlies
+Yves Pons,23,,,,,,,Two-Way Contract,,Grizzlies
+Tyrell Terry,21,,,,,,,Two-Way Contract,"$85,578",Grizzlies
+Sam Merrill,26,"$1,517,981",,,,,,,"$1,517,981",Grizzlies
+Russell Westbrook,33,"$44,211,146","$47,063,478",,,,,Bird Rights,"$91,274,624",Lakers
+LeBron James,37,"$41,180,544","$44,474,988",,,,,Bird,"$85,655,532",Lakers
+Anthony Davis,29,"$35,361,360","$37,980,720","$40,600,080","$43,219,440",,,Bird,"$113,942,160",Lakers
+Talen Horton-Tucker,21,"$9,500,000","$10,260,000","$11,020,000",,,,Early Bird,"$19,760,000",Lakers
+Kendrick Nunn,26,"$5,000,000","$5,250,000",,,,,Mini MLE,"$10,250,000",Lakers
+Dwight Howard,36,"$2,641,691",,,,,,Minimum Salary,"$2,641,691",Lakers
+Carmelo Anthony,38,"$2,641,691",,,,,,Minimum Salary,"$2,641,691",Lakers
+Wayne Ellington,34,"$2,641,691",,,,,,Minimum Salary,"$2,641,691",Lakers
+Avery Bradley,31,"$2,641,691",,,,,,Minimum Salary,"$2,641,691",Lakers
+Kent Bazemore,33,"$2,401,537",,,,,,Minimum Salary,"$2,401,537",Lakers
+Malik Monk,24,"$1,789,256",,,,,,Minimum Salary,"$1,789,256",Lakers
+Austin Reaves,24,"$925,258",,,,,,Minimum Salary,"$925,258",Lakers
+Stanley Johnson,26,"$888,616","$2,351,521",,,,,Minimum Salary,"$3,600,386",Lakers
+D.J. Augustin,34,"$622,467",,,,,,Minimum Salary,"$622,467",Lakers
+Wenyen Gabriel,25,"$29,814","$1,878,720",,,,,Minimum Salary,"$29,814",Lakers
+Mason Jones,23,,,,,,,Two-Way Contract,,Lakers
+Mac McClung,23,,,,,,,Two-Way Contract,,Lakers
+Luol Deng,37,"$5,000,000",,,,,,,"$5,000,000",Lakers
+DeAndre Jordan,33,"$2,641,691",,,,,,,"$2,641,691",Lakers
+Trevor Ariza,37,"$2,641,691",,,,,,,"$2,641,691",Lakers
+Paul George,32,"$39,344,970","$42,492,568","$45,640,165","$48,787,763",,,Bird,"$127,477,703",Clippers
+Kawhi Leonard,31,"$39,344,900","$42,492,492","$45,640,084","$48,787,676",,,Early Bird,"$127,477,476",Clippers
+Marcus Morris,32,"$15,627,907","$16,372,093","$17,116,279",,,,Non Bird,"$49,116,279",Clippers
+Norman Powell,29,"$15,517,242","$16,758,621","$18,000,000","$19,241,379","$20,482,758",,Bird,"$90,000,000",Clippers
+Robert Covington,31,"$12,975,471","$12,000,000","$12,000,000",,,,Cap Space,"$36,975,471",Clippers
+Luke Kennard,26,"$12,727,273","$13,745,455","$14,763,636","$14,763,636",,,Bird,"$41,236,364",Clippers
+Reggie Jackson,32,"$10,384,500","$11,215,260",,,,,Early Bird,"$21,599,760",Clippers
+Rodney Hood,29,"$2,239,544",,,,,,Minimum Salary,"$2,239,544",Clippers
+Terance Mann,25,"$1,782,621","$1,930,681","$10,576,923","$11,423,077",,,Minimum Salary,"$25,713,302",Clippers
+Isaiah Hartenstein,24,"$1,729,217",,,,,,Minimum Salary,"$1,729,217",Clippers
+Jason Preston,22,"$1,062,303","$1,563,518","$1,836,096",,,,Mini MLE,"$2,625,821",Clippers
+Brandon Boston Jr.,20,"$925,258","$1,563,518","$1,836,096",,,,Mini MLE,"$2,488,776",Clippers
+Amir Coffey,25,"$153,488",,,,,,Minimum Salary,"$153,488",Clippers
+Xavier Moon,27,,,,,,,Two-Way Contract,"$159,528",Clippers
+Jay Scrubb,21,,,,,,,Two-Way Contract,,Clippers
+Semi Ojeleye,27,"$1,789,256",,,,,,,"$1,789,256",Clippers
+Buddy Hield,29,"$22,477,273","$20,522,727","$18,568,182",,,,1st Round pick,"$61,568,182",Pacers
+Malcolm Brogdon,29,"$21,700,000","$22,600,000","$21,634,615","$23,365,385",,,Sign and Trade,"$89,300,000",Pacers
+Ricky Rubio,31,"$17,800,000",,,,,,Cap Space,"$17,800,000",Pacers
+Myles Turner,26,"$17,500,000","$17,500,000",,,,,1st Round pick,"$35,000,000",Pacers
+T.J. Warren,28,"$12,690,000",,,,,,1st Round Pick,"$12,690,000",Pacers
+T.J. McConnell,30,"$7,500,000","$8,100,000","$8,700,000","$9,300,000",,,Early Bird,"$29,300,000",Pacers
+Jalen Smith,22,"$4,458,000","$4,670,160","$5,954,454",,,,1st Round Pick,"$4,458,000",Pacers
+Tyrese Haliburton,22,"$4,023,600","$4,215,120","$5,808,435",,,,1st Round Pick,"$8,238,720",Pacers
+Chris Duarte,25,"$3,749,520","$3,936,960","$4,124,280","$5,893,596",,,1st Round Pick,"$7,686,480",Pacers
+Goga Bitadze,22,"$3,098,400","$4,765,339",,,,,1st Round Pick,"$7,863,739",Pacers
+Isaiah Jackson,20,"$2,451,120","$2,573,760","$2,696,280","$4,435,381",,,1st Round Pick,"$5,024,880",Pacers
+Oshae Brissett,24,"$1,701,593","$1,846,738",,,,,MLE,"$1,701,593",Pacers
+Duane Washington Jr.,22,"$950,000","$1,563,518","$1,836,096",,,,Minimum Salary,"$950,000",Pacers
+Lance Stephenson,31,"$924,730",,,,,,Minimum Salary,"$1,476,806",Pacers
+Terry Taylor,22,"$600,000","$1,563,518","$1,836,096",,,,Minimum Salary,"$1,225,000",Pacers
+Nate Hinton,23,,,,,,,Two-Way Contract,"$85,578",Pacers
+Gabe York,28,,,,,,,Two-Way Contract,,Pacers
+Tristan Thompson,31,"$8,946,611",,,,,,,"$8,946,611",Pacers
+Monta Ellis,36,"$2,245,400",,,,,,,"$2,245,400",Pacers
+Brad Wanamaker,32,"$715,538",,,,,,,"$715,538",Pacers
+Keifer Sykes,28,"$558,345",,,,,,,"$558,345",Pacers
+John Wall,31,"$44,310,840","$40,866,760",,,,,Bird Rights,"$85,177,600",Rockets
+Eric Gordon,33,"$18,218,818","$19,568,360","$20,917,902",,,,Cap Space,"$37,787,178",Rockets
+Christian Wood,26,"$13,666,667",,,,,,Sign and Trade,"$13,666,667",Rockets
+Jalen Green,20,"$8,992,200","$9,441,720","$9,891,600","$12,483,199",,,1st Round Pick,"$18,433,920",Rockets
+Dennis Schröder,28,"$5,890,000",,,,,,Mini MLE,"$5,890,000",Rockets
+David Nwaba,29,"$4,650,000","$5,022,000","$5,394,000",,,,Early Bird,"$9,672,000",Rockets
+Alperen Şengün,19,"$3,214,680","$3,375,480","$3,536,400","$5,424,838",,,1st Round Pick,"$6,590,160",Rockets
+Usman Garuba,20,"$2,353,320","$2,471,160","$2,588,400","$4,392,515",,,1st Round Pick,"$4,824,480",Rockets
+Josh Christopher,20,"$2,259,240","$2,372,160","$2,485,200","$4,346,615",,,1st Round Pick,"$4,631,400",Rockets
+Garrison Mathews,25,"$2,000,000","$2,000,000","$2,000,000","$2,230,253",,,Cap Space,"$2,000,000",Rockets
+Kevin Porter Jr.,22,"$1,782,621","$3,217,631",,,,,1st Round Pick,"$5,000,252",Rockets
+Bruno Fernando,23,"$1,782,621",,,,,,Cap space,"$1,782,621",Rockets
+Kenyon Martin Jr.,21,"$1,517,981","$1,782,621","$1,930,681",,,,MLE,"$1,517,981",Rockets
+Jae'Sean Tate,26,"$1,517,981","$1,782,621",,,,,MLE,"$1,517,981",Rockets
+Daishen Nix,20,"$612,000","$1,563,518","$1,836,096","$1,988,598",,,Minimum Salary,"$2,175,518",Rockets
+Anthony Lamb,24,,,,,,,Two-Way Contract,,Rockets
+Trevelin Queen,25,,,,,,,Two-Way Contract,,Rockets
+D.J. Augustin,34,"$7,000,000","$333,333",,,,,,"$7,333,333",Rockets
+Enes Freedom,30,"$2,641,691",,,,,,,"$2,641,691",Rockets
+Armoni Brooks,24,"$1,489,065",,,,,,,"$1,489,065",Rockets
+Danuel House Jr.,29,"$1,387,498",,,,,,,"$1,387,498",Rockets
+Troy Williams,27,"$122,741","$122,741",,,,,,"$245,482",Rockets
+Stephen Curry,34,"$45,780,966","$48,070,014","$51,915,615","$55,761,216","$59,606,817",,Bird Rights,"$261,134,628",Warriors
+Klay Thompson,32,"$37,980,720","$40,600,080","$43,219,440",,,,Bird Rights,"$121,800,240",Warriors
+Andrew Wiggins,27,"$31,579,390","$33,616,770",,,,,1st Round Pick,"$65,196,160",Warriors
+Draymond Green,32,"$24,026,712","$25,806,469","$27,586,225",,,,Bird Rights,"$49,833,181",Warriors
+James Wiseman,21,"$9,166,800","$9,603,360","$12,119,440",,,,1st Round Pick,"$18,770,160",Warriors
+Jonathan Kuminga,19,"$5,466,360","$5,739,960","$6,012,720","$7,636,154",,,1st Round Pick,"$11,206,320",Warriors
+Kevon Looney,26,"$5,178,572",,,,,,Bird Rights,"$5,178,572",Warriors
+Moses Moody,20,"$3,562,080","$3,740,160","$3,918,480","$5,803,269",,,1st Round Pick,"$7,302,240",Warriors
+Andre Iguodala,38,"$2,641,691",,,,,,Minimum Salary,"$2,641,691",Warriors
+Otto Porter Jr.,29,"$2,389,641",,,,,,Minimum Salary,"$2,389,641",Warriors
+Jordan Poole,23,"$2,161,440","$3,901,399",,,,,1st Round Pick,"$6,062,839",Warriors
+Nemanja Bjelica,34,"$2,089,448",,,,,,Minimum Salary,"$2,089,448",Warriors
+Gary Payton II,29,"$1,939,350",,,,,,Minimum Salary,"$1,939,350",Warriors
+Damion Lee,29,"$1,910,860",,,,,,MLE,"$1,910,860",Warriors
+Juan Toscano-Anderson,29,"$1,701,593",,,,,,Minimum Salary,"$1,701,593",Warriors
+Quinndary Weatherspoon,25,,,,,,,Two-Way Contract,"$95,930",Warriors
+Chris Chiozza,26,,,,,,,Two-Way Contract,,Warriors
+Shaun Livingston,36,"$666,667",,,,,,,"$666,667",Warriors
+Jerami Grant,28,"$20,002,500","$20,955,000",,,,,Sign and Trade,"$40,957,500",Pistons
+Kelly Olynyk,31,"$12,195,122","$12,804,878","$12,195,122",,,,Cap Space,"$28,000,000",Pistons
+Marvin Bagley III,23,"$11,312,114",,,,,,1st Round Pick,"$11,312,114",Pistons
+Cade Cunningham,20,"$10,050,120","$10,552,800","$11,055,240","$13,940,658",,,1st Round Pick,"$20,602,920",Pistons
+Killian Hayes,20,"$5,572,680","$5,837,760","$7,413,955",,,,1st Round Pick,"$11,410,440",Pistons
+Hamidou Diallo,23,"$5,200,000","$5,200,000",,,,,Bird,"$10,400,000",Pistons
+Cory Joseph,30,"$4,910,000","$5,155,000",,,,,Room Exception,"$12,465,000",Pistons
+Isaiah Stewart,21,"$3,277,080","$3,433,320","$5,266,713",,,,1st Round Pick,"$6,710,400",Pistons
+Frank Jackson,24,"$3,000,000","$3,150,000",,,,,Cap Space,"$3,000,000",Pistons
+Saddiq Bey,23,"$2,824,320","$2,959,080","$4,556,983",,,,1st Round Pick,"$5,783,400",Pistons
+Rodney McGruder,30,"$1,939,350",,,,,,Minimum Salary,"$1,939,350",Pistons
+Saben Lee,23,"$1,489,065","$1,752,638","$1,902,137",,,,Cap Space,"$3,241,703",Pistons
+Isaiah Livers,23,"$1,057,260","$1,563,518","$1,836,096",,,,Cap Space,"$2,620,778",Pistons
+Luka Garza,23,"$925,258",,,,,,Minimum Salary,"$925,258",Pistons
+Carsen Edwards,24,"$76,744","$1,815,677",,,,,Minimum Salary,"$76,744",Pistons
+Braxton Key,25,,,,,,,Two-Way Contract,"$53,176",Pistons
+Jamorko Pickett,24,,,,,,,Two-Way Contract,,Pistons
+Blake Griffin,33,"$29,764,126",,,,,,,"$29,764,126",Pistons
+DeAndre Jordan,33,"$7,875,533","$7,827,907",,,,,,"$15,703,440",Pistons
+Dewayne Dedmon,32,"$2,866,667","$2,866,667","$2,866,667","$2,866,667",,,,"$11,466,668",Pistons
+Nikola Jokić,27,"$30,510,423","$32,478,837",,,,,Bird Rights,"$62,989,260",Nuggets
+Jamal Murray,25,"$29,467,800","$31,650,600","$33,833,400","$36,016,200",,,1st Round pick,"$130,968,000",Nuggets
+Aaron Gordon,26,"$16,409,091","$19,690,909","$21,266,182","$22,841,455","$22,841,455",,Bird Rights,"$80,207,637",Nuggets
+Will Barton,31,"$15,625,000","$14,375,000",,,,,Bird,"$30,000,000",Nuggets
+Monte Morris,27,"$8,849,071","$9,125,000","$9,800,926",,,,Bird,"$27,774,997",Nuggets
+JaMychal Green,32,"$8,200,000",,,,,,Non Bird,"$8,200,000",Nuggets
+Michael Porter Jr.,24,"$5,258,735","$29,750,000","$32,130,000","$34,510,000","$36,890,000","$39,270,000",1st Round Pick,"$150,538,735",Nuggets
+Jeff Green,35,"$4,500,000","$4,500,000",,,,,MLE,"$9,000,000",Nuggets
+Facundo Campazzo,31,"$2,975,000",,,,,,Bi-Annual Exception,"$2,975,000",Nuggets
+Zeke Nnaji,21,"$2,498,760","$2,617,800","$4,306,281",,,,1st Round Pick,"$5,116,560",Nuggets
+Austin Rivers,29,"$2,401,537",,,,,,Minimum Salary,"$2,401,537",Nuggets
+Bones Hyland,21,"$2,096,880","$2,201,400","$2,306,400","$4,158,439",,,1st Round Pick,"$4,298,280",Nuggets
+Vlatko Čančar,25,"$1,782,621",,,,,,MLE,"$1,782,621",Nuggets
+DeMarcus Cousins,31,"$683,196",,,,,,Minimum Salary,"$1,138,659",Nuggets
+Markus Howard,23,,,,,,,Two-Way Contract,,Nuggets
+Davon Reed,27,,,,,,,Two-Way Contract,"$286,164",Nuggets
+Tim Hardaway Jr.,30,"$21,306,816","$19,602,273","$17,897,728","$16,193,183",,,Bird,"$75,000,000",Mavericks
+Spencer Dinwiddie,29,"$17,142,857","$18,000,000","$18,857,143",,,,Sign and Trade,"$45,142,857",Mavericks
+Dāvis Bertāns,29,"$16,000,000","$16,000,000","$17,000,000","$16,000,000",,,Bird,"$60,000,000",Mavericks
+Dwight Powell,30,"$11,080,125","$11,080,125",,,,,Cap Space,"$22,160,250",Mavericks
+Luka Dončić,23,"$10,174,391","$35,700,000","$38,556,000","$41,412,000","$44,268,000","$47,124,000",1st Round Pick,"$217,234,391",Mavericks
+Reggie Bullock,31,"$9,536,000","$10,012,800","$10,489,600",,,,MLE,"$25,000,000",Mavericks
+Maxi Kleber,30,"$8,750,000","$9,000,000",,,,,Early Bird Rights,"$8,750,000",Mavericks
+Dorian Finney-Smith,29,"$4,000,000","$12,402,000","$13,394,160","$14,386,320","$15,378,480",,Bird Rights,"$44,182,480",Mavericks
+Boban Marjanović,33,"$3,500,000",,,,,,Early Bird,"$3,500,000",Mavericks
+Trey Burke,29,"$3,150,000",,,,,,MLE,"$3,150,000",Mavericks
+Sterling Brown,27,"$3,000,000",,,,,,Bi-Annual Exception,"$3,000,000",Mavericks
+Josh Green,21,"$2,957,520","$3,098,400","$4,765,339",,,,1st Round Pick,"$6,055,920",Mavericks
+Jalen Brunson,25,"$1,802,057",,,,,,Cap Space,"$1,802,057",Mavericks
+Frank Ntilikina,23,"$1,789,256","$2,036,318",,,,,Minimum Salary,"$1,789,256",Mavericks
+Marquese Chriss,25,"$958,529",,,,,,Minimum Salary,"$1,292,900",Mavericks
+Moses Wright,23,,,,,,,Two-Way Contract,,Mavericks
+Theo Pinson,26,,,,,,,Two-Way Contract,"$197,076",Mavericks
+Moses Brown,22,"$1,701,593",,,,,,,"$1,701,593",Mavericks
+Tyrell Terry,21,"$1,517,981","$1,782,621",,,,,,"$3,300,602",Mavericks
+Kevin Love,33,"$31,258,256","$28,942,830",,,,,Bird Rights,"$60,201,086",Cavaliers
+Jarrett Allen,24,"$20,000,000","$20,000,000","$20,000,000","$20,000,000","$20,000,000",,Bird,"$100,000,000",Cavaliers
+Caris LeVert,27,"$17,500,000","$18,796,296",,,,,1st Round pick,"$36,296,296",Cavaliers
+Lauri Markkanen,25,"$15,690,909","$16,475,454","$17,259,999","$18,044,544",,,Sign and Trade,"$55,426,362",Cavaliers
+Cedi Osman,27,"$8,133,334","$7,426,088","$6,718,842",,,,MLE,"$15,559,422",Cavaliers
+Evan Mobley,21,"$8,075,160","$8,478,720","$8,882,760","$11,227,809",,,1st Round Pick,"$16,553,880",Cavaliers
+Darius Garland,22,"$7,040,880","$8,920,795",,,,,1st Round Pick,"$15,961,675",Cavaliers
+Isaac Okoro,21,"$6,720,720","$7,040,880","$8,920,795",,,,1st Round Pick,"$13,761,600",Cavaliers
+Collin Sexton,23,"$6,349,671",,,,,,1st Round Pick,"$6,349,671",Cavaliers
+Ed Davis,33,"$2,641,691",,,,,,Minimum Salary,"$2,641,691",Cavaliers
+Rajon Rondo,36,"$2,641,691",,,,,,Minimum Salary,"$2,641,691",Cavaliers
+Dylan Windler,25,"$2,239,200","$4,037,278",,,,,1st Round Pick,"$6,276,478",Cavaliers
+Dean Wade,25,"$1,782,621","$1,930,681",,,,,MLE,"$3,713,302",Cavaliers
+Lamar Stevens,24,"$1,517,981","$1,782,621","$1,930,681",,,,MLE,"$1,517,981",Cavaliers
+RJ Nembhard Jr.,23,"$58,493",,,,,,,"$58,493",Cavaliers
+Moses Brown,22,"$19,186",,,,,,Minimum Salary,"$211,046",Cavaliers
+Brandon Goodwin,26,,,,,,,Two-Way Contract,"$99,380",Cavaliers
+Kevin Pangos,29,"$1,669,178",,,,,,,"$1,669,178",Cavaliers
+J.R. Smith,36,"$1,456,666",,,,,,,"$1,456,666",Cavaliers
+Gordon Hayward,32,"$29,925,000","$30,075,000","$31,500,000",,,,Sign and Trade,"$91,500,000",Hornets
+Terry Rozier,28,"$17,905,263","$21,486,316","$23,205,221","$24,924,126","$26,643,031",,Sign and Trade,"$114,163,957",Hornets
+Kelly Oubre Jr.,26,"$12,000,000","$12,600,000",,,,,Cap Space,"$17,000,000",Hornets
+Montrezl Harrell,28,"$9,720,900",,,,,,MLE,"$9,720,900",Hornets
+LaMelo Ball,20,"$8,231,760","$8,623,920","$10,900,635",,,,1st Round Pick,"$16,855,680",Hornets
+Mason Plumlee,32,"$8,137,500","$8,525,000",,,,,Cap space,"$16,662,500",Hornets
+Miles Bridges,24,"$5,421,493",,,,,,1st Round Pick,"$5,421,493",Hornets
+P.J. Washington,23,"$4,215,120","$5,808,435",,,,,1st Round Pick,"$10,023,555",Hornets
+James Bouknight,21,"$4,154,400","$4,362,240","$4,570,080","$6,064,496",,,1st Round Pick,"$8,516,640",Hornets
+Kai Jones,21,"$2,770,560","$2,909,160","$3,047,760","$4,693,550",,,1st Round Pick,"$5,679,720",Hornets
+Cody Martin,26,"$1,782,621",,,,,,MLE,"$1,782,621",Hornets
+Jalen McDaniels,24,"$1,782,621","$1,930,681",,,,,Minimum Salary,"$3,713,302",Hornets
+Nick Richards,24,"$1,517,981","$1,782,621",,,,,Cap Space,"$1,517,981",Hornets
+JT Thor,19,"$1,250,000","$1,563,518","$1,836,096","$1,988,598",,,Cap Space,"$2,813,518",Hornets
+Isaiah Thomas,33,"$276,039",,,,,,Minimum Salary,"$552,077",Hornets
+Scottie Lewis,22,,,,,,,Two-Way Contract,,Hornets
+Arnoldas Kulboka,24,,,,,,,Two-Way Contract,,Hornets
+Nicolas Batum,33,"$8,856,969","$8,856,969",,,,,,"$17,713,938",Hornets
+DeMar DeRozan,32,"$26,000,000","$27,300,000","$28,600,000",,,,Sign and Trade,"$81,900,000",Bulls
+Nikola Vučević,31,"$24,000,000","$22,000,000",,,,,Bird Rights,"$46,000,000",Bulls
+Zach LaVine,27,"$19,500,000",,,,,,Cap space,"$19,500,000",Bulls
+Lonzo Ball,24,"$18,604,651","$19,534,884","$20,465,117","$21,395,348",,,Sign and Trade,"$58,604,652",Bulls
+Derrick Jones Jr.,25,"$9,720,900",,,,,,MLE,"$9,720,900",Bulls
+Alex Caruso,28,"$8,604,651","$9,034,884","$9,465,116","$9,895,349",,,MLE,"$37,000,000",Bulls
+Patrick Williams,20,"$7,422,000","$7,775,400","$9,835,881",,,,1st Round Pick,"$15,197,400",Bulls
+Coby White,22,"$5,837,760","$7,413,955",,,,,1st Round Pick,"$5,837,760",Bulls
+Troy Brown Jr.,22,"$5,170,564",,,,,,1st Round Pick,"$5,170,564",Bulls
+Tony Bradley,24,"$1,789,256","$2,036,318",,,,,Minimum Salary,"$3,825,574",Bulls
+Matt Thomas,27,"$1,669,178",,,,,,Minimum Salary,"$1,669,178",Bulls
+Javonte Green,28,"$1,669,178","$1,815,677",,,,,Minimum Salary,"$3,484,855",Bulls
+Tristan Thompson,31,"$1,000,000",,,,,,Bi-Annual Exception,"$1,000,000",Bulls
+Marko Simonovic,22,"$925,258","$1,563,518","$1,836,096",,,,MLE,"$2,488,776",Bulls
+Ayo Dosunmu,22,"$925,258","$1,563,518",,,,,Minimum Salary,"$925,258",Bulls
+Malcolm Hill,26,,,,,,,Two-Way Contract,"$53,176",Bulls
+Tyler Cook,24,,,,,,,Two-Way Contract,,Bulls
+Alfonzo McKinnie,29,"$1,090,007",,,,,,,"$1,293,926",Bulls
+Alize Johnson,26,"$705,598",,,,,,,"$705,598",Bulls
+Kevin Durant,33,"$40,918,900","$44,119,845","$46,407,433","$49,856,021","$53,282,609",,Sign and Trade,"$234,584,808",Nets
+Kyrie Irving,30,"$34,916,200","$36,503,300",,,,,Cap space,"$71,419,500",Nets
+Ben Simmons,25,"$33,003,936","$35,448,672","$37,893,408","$40,338,144",,,1st Round pick,"$146,684,160",Nets
+Joe Harris,30,"$17,357,143","$18,642,857","$19,928,571",,,,Bird,"$55,928,571",Nets
+Seth Curry,31,"$8,207,518","$8,496,653",,,,,MLE,"$16,704,171",Nets
+Patty Mills,33,"$5,890,000","$6,184,500",,,,,Mini MLE,"$5,890,000",Nets
+Bruce Brown,25,"$4,736,102",,,,,,,"$4,736,102",Nets
+LaMarcus Aldridge,36,"$2,641,691",,,,,,Minimum Salary,"$2,641,691",Nets
+Blake Griffin,33,"$2,641,691",,,,,,Minimum Salary,"$2,641,691",Nets
+Andre Drummond,28,"$2,401,537",,,,,,Minimum Salary,"$2,401,537",Nets
+Cam Thomas,20,"$2,036,280","$2,138,160","$2,240,040","$4,041,032",,,1st Round Pick,"$4,174,440",Nets
+Day'Ron Sharpe,20,"$2,009,040","$2,109,360","$2,210,160","$3,989,339",,,1st Round Pick,"$4,118,400",Nets
+Nic Claxton,23,"$1,782,621",,,,,,Minimum Salary,"$1,782,621",Nets
+Goran Dragić,36,"$728,742",,,,,,Minimum Salary,"$728,742",Nets
+Kessler Edwards,21,"$5,318","$1,563,518",,,,,Minimum Salary,"$5,318",Nets
+David Duke Jr.,22,,,,,,,Two-Way Contract,,Nets
+Jevon Carter,26,"$3,650,000","$3,925,000",,,,,,"$7,575,000",Nets
+James Johnson,35,"$2,641,691",,,,,,,"$2,641,691",Nets
+DeAndre' Bembry,27,"$1,939,350",,,,,,,"$1,939,350",Nets
+John Collins,24,"$23,000,000","$23,500,000","$25,340,000","$26,580,000","$26,580,000",,Bird,"$125,000,000",Hawks
+Danilo Gallinari,33,"$20,475,000",,,,,,Sign and Trade,"$20,475,000",Hawks
+Bogdan Bogdanović,29,"$18,000,000","$18,000,000","$18,000,000",,,,Cap Space,"$36,000,000",Hawks
+Clint Capela,28,"$17,103,448","$18,206,897","$20,616,000","$22,265,280",,,Bird Rights,"$78,191,625",Hawks
+Delon Wright,30,"$8,526,316",,,,,,Sign and Trade,"$8,526,316",Hawks
+Trae Young,23,"$8,326,471","$29,750,000","$32,130,000","$34,510,000","$36,890,000","$39,270,000",1st Round Pick,"$180,876,471",Hawks
+De'Andre Hunter,24,"$7,775,400","$9,835,881",,,,,1st Round Pick,"$17,611,281",Hawks
+Onyeka Okongwu,21,"$6,104,280","$6,395,160","$8,109,063",,,,1st Round Pick,"$12,499,440",Hawks
+Kevin Knox,22,"$5,845,978",,,,,,1st Round Pick,"$5,845,978",Hawks
+Lou Williams,35,"$5,000,000",,,,,,Bird,"$5,000,000",Hawks
+Kevin Huerter,23,"$4,253,357","$14,508,929","$15,669,643","$16,830,357","$17,991,071",,1st Round Pick,"$69,253,357",Hawks
+Gorgui Dieng,32,"$4,000,000",,,,,,MLE,"$4,000,000",Hawks
+Jalen Johnson,20,"$2,659,560","$2,792,520","$2,925,480","$4,511,090",,,1st Round Pick,"$5,452,080",Hawks
+Timothé Luwawu-Cabarrot,27,"$1,939,350",,,,,,Minimum Salary,"$1,939,350",Hawks
+Skylar Mays,24,"$34,231",,,,,,Minimum Salary,"$34,231",Hawks
+Sharife Cooper,21,,,,,,,Two-Way Contract,,Hawks
+Chaundee Brown Jr.,23,,,,,,,Two-Way Contract,"$53,176",Hawks
+Jayson Tatum,24,"$28,103,550","$30,351,834","$32,600,118","$34,848,402","$37,096,686",,Bird,"$125,903,904",Celtics
+Al Horford,36,"$27,000,000","$26,500,000",,,,,Cap Space,"$41,500,000",Celtics
+Jaylen Brown,25,"$24,830,357","$26,669,643","$28,508,929",,,,1st Round pick,"$80,008,929",Celtics
+Derrick White,28,"$15,178,571","$16,392,857","$17,607,143","$18,821,429",,,Bird,"$68,000,000",Celtics
+Marcus Smart,28,"$13,839,285","$16,607,142","$18,583,713","$19,960,285","$21,336,856",,Bird Rights,"$90,327,281",Celtics
+Daniel Theis,30,"$8,280,351","$8,694,369","$9,108,386","$9,522,404",,,Sign and Trade,"$26,083,106",Celtics
+Robert Williams,24,"$3,661,976","$10,700,000","$11,556,000","$12,412,000","$13,268,000",,1st Round Pick,"$51,597,976",Celtics
+Aaron Nesmith,22,"$3,631,200","$3,804,360","$5,634,257",,,,1st Round Pick,"$7,435,560",Celtics
+Grant Williams,23,"$2,617,800","$4,306,281",,,,,1st Round Pick,"$6,924,081",Celtics
+Payton Pritchard,24,"$2,137,440","$2,239,200","$4,037,278",,,,1st Round Pick,"$4,376,640",Celtics
+Luke Kornet,26,"$606,702",,,,,,Minimum Salary,"$606,702",Celtics
+Nik Stauskas,28,"$423,536","$2,193,920",,,,,Minimum Salary,"$423,536",Celtics
+Sam Hauser,24,"$313,737","$1,563,518",,,,,Minimum Salary,"$313,737",Celtics
+Malik Fitts,24,"$231,062","$1,752,638",,,,,Minimum Salary,"$402,218",Celtics
+Juwan Morgan,25,"$19,186","$1,815,677",,,,,Minimum Salary,"$115,116",Celtics
+Matt Ryan,25,,,,,,,Two-Way Contract,,Celtics
+Brodric Thomas,25,,,,,,,Two-Way Contract,,Celtics
+Jabari Parker,27,"$1,068,288",,,,,,,"$1,168,288",Celtics
+Guerschon Yabusele,26,"$1,039,080",,,,,,,"$1,039,080",Celtics
+Demetrius Jackson,27,"$92,857","$92,857","$92,857",,,,,"$278,571",Celtics
