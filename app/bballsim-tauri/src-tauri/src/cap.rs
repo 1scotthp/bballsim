@@ -158,6 +158,7 @@ pub fn get_team_cap_sheet(team: String, data: String) -> Vec<Player> {
 }
 
 use rusty_money::{Money, Round, iso};
+use rust_decimal::prelude::ToPrimitive;
 
 
 // this whole thing should really be in team objects
@@ -168,7 +169,7 @@ use rust_decimal_macros::dec;
 #[tauri::command]
 pub fn trade(team1: String, team2: String, players1: Vec<Player>, players2: Vec<Player>, data: String) -> (bool, String) {
 
-    let cap = Money::from_minor(CAP[1]*100, iso::USD);
+    let cap = CAP[1];
     let master_cap_sheet: HashMap<String, Player> = get_cap_dict(data.clone());
 
 
@@ -190,81 +191,92 @@ pub fn trade(team1: String, team2: String, players1: Vec<Player>, players2: Vec<
 
     
 
-    let mut players_salary_1 = Money::from_minor(0, iso::USD);
+    let mut players_salary_1: f64 = 0.0;
     for player in players1{
-        if &player.one.len() < &1{
+        if &player.zero.len() < &1{
             continue
         }
-        players_salary_1 += Money::from_str(&player.one[1..], iso::USD).unwrap()
+        players_salary_1 += Money::from_str(&player.zero[1..], iso::USD).unwrap().amount().to_f64().unwrap()
     }
 
 
     // THIS NEEDS A LOT OF LOGIC TO UNDERSTAND CORRECT NUMBER
     // NEED TO WORK OUT WHAT NON GUARANTEES THERE ARE
     // find out rules for what counts towards cap
-    let mut salary_team_1 = Money::from_minor(0, iso::USD);
+    let mut salary_team_1: f64 = 0.0;
     for player in team_1_books{
-        if &player.one.len() < &1{
+        if &player.zero.len() < &1{
             continue
         }
-        salary_team_1 += Money::from_str(&player.one[1..], iso::USD).unwrap()
+        salary_team_1 += Money::from_str(&player.zero[1..], iso::USD).unwrap().amount().to_f64().unwrap()
     }
 
     // println!("{} {} {} {}", team1, salary_team_1, players_salary_1, cap);
 
-    let mut players_salary_2 = Money::from_minor(0, iso::USD);
+    let mut players_salary_2: f64 = 0.0;
     for player in players2{
-        if &player.one.len() < &1{
+        if &player.zero.len() < &1{
             continue
         }
-        players_salary_2 += Money::from_str(&player.one[1..], iso::USD).unwrap()
+        players_salary_2 += Money::from_str(&player.zero[1..], iso::USD).unwrap().amount().to_f64().unwrap()
     }
 
-    let mut salary_team_2 = Money::from_minor(0, iso::USD);
+    let mut salary_team_2: f64 = 0.0;
     for player in team_2_books{
-        if &player.one.len() < &1{
+        if &player.zero.len() < &1{
             continue
         }
-        salary_team_2 += Money::from_str(&player.one[1..], iso::USD).unwrap()
+        salary_team_2 += Money::from_str(&player.zero[1..], iso::USD).unwrap().amount().to_f64().unwrap()
     }
 
     println!("{} {} {} {} {}", team2, salary_team_2, players_salary_2, players_salary_1, cap);
 
-    println!("{} {}", *players_salary_1.amount() * dec!(1.25) > *players_salary_2.amount(), *players_salary_2.amount() * dec!(1.25) > *players_salary_1.amount());
+    // println!("{} {}", players_salary_1 * dec!(1.25) > players_salary_2, players_salary_2 * dec!(1.25) > *players_salary_1);
 
 
-    if *players_salary_1.amount() * dec!(1.25) >= *players_salary_2.amount() && *players_salary_2.amount() * dec!(1.25) >= *players_salary_1.amount(){
-        return (true, "Salary within 125%".to_string())
-    } else {
-        // here should try all of the other ways to get trades to work
-        if salary_team_1+ players_salary_2 > cap &&  *salary_team_2.amount() + *players_salary_1.amount() > *cap.amount(){
-            // println!("{}  <  {}", *salary_team_1.amount() + *players_salary_2.amount(), *cap.amount());
-            return (false, "Insufficient matching salary. Both teams over cap".to_string())
-        } else if salary_team_2 + players_salary_1 > cap {
-            return (false, "Insufficient matching salary. Team 2 over cap".to_string())
-        }
+    let valid_team_1 = validate_trade_for_team(salary_team_1, players_salary_1, players_salary_2);
+    let valid_team_2 = validate_trade_for_team(salary_team_2, players_salary_2, players_salary_1);
+
+
+    if !valid_team_1{
+        return (false, "Insufficient matching salary & Trade invalid for team 1 (or both)".to_string())
     }
-   
-
-
-    // let chi: Team = Team {
-    //     team: "CHI",
-    //     salary: 100000000
-    // }
-
-    // let mil: Team = Team {
-    //     team: "MIL",
-    //     salary: 100000000
-    // }
-
-    //check if either team goes over cap
-        // if true check within 125%
-            //reject if not
-    
-    // println!("{} {}", salary_team_1.amount + players_salary_2, salary_team_2 + players_salary_1);
-    (true, "room".to_string())
+    else if !valid_team_2{
+        return (false, "Insufficient matching salary & Trade invalid for team 2".to_string())
+    } else {
+        return (true, "valid".to_string())
+    }
 
 }
+
+use rust_decimal;
+fn validate_trade_for_team(team_salary: f64, outgoing: f64, incoming: f64) -> bool {
+            // here should try all of the other ways to get trades to work
+
+    let cap = CAP[0];
+    // cap room
+    if team_salary + incoming < cap as f64 {
+        return true
+    }
+    //TPE
+    match outgoing {
+        //1.75*outgoing + 100k
+        0.0..=6533333.0=> {
+            return 1.75*outgoing + 100000.0 > incoming
+        }
+        6533334.0..=19600000.0=>{
+            return outgoing + 5000000.0 > incoming
+        }
+        _ => {
+            return outgoing * 1.25 > incoming
+        }
+    }
+    
+
+    return true
+}
+
+
 
 
 fn main() {
@@ -431,9 +443,11 @@ pub fn get_cap_dict(contract_data: String) -> HashMap<String, Player>{
 
 }
 
+
 // fn make_team_objects() {
 
 // }
+
 
 // re-signing vs free agents bird rights
 pub fn signing() {
