@@ -49,8 +49,8 @@ struct Team {
 
 // use std::error::Error;
 
-#[derive(Deserialize, Clone)]
-#[serde(rename_all = "camelCase")]
+#[derive(Deserialize, Clone, Serialize)]
+// #[serde(rename_all = "camelCase")]
 pub struct Player {
     Player: String,
     Age: i8,
@@ -62,9 +62,14 @@ pub struct Player {
     five: String,
     Signed: String,
     Guaranteed: String,
-    Team: String
-    
-
+    Team: String,
+    Position: String,
+    EXP: String,
+    TeamAbbr: String,
+    Amount: String,
+    option_type: String,
+    option_year: String
+    // checked:bool
     // contract: Vec<i64>,// next 5 years
     // exp: i8, //years experience (age - 20 for now)
 }
@@ -126,47 +131,120 @@ fn use_non_qual_vet_fa(){
 
 }
 
+#[tauri::command]
+pub fn get_team_cap_sheet(team: String, data: String) -> Vec<Player> {
+    let master_cap_sheet: HashMap<String, Player> = get_cap_dict(data);
+
+
+
+
+    let m: Vec<Player> = master_cap_sheet.values().cloned().collect::<Vec<Player>>();
+    let f: Vec<Player> = m.into_iter().filter(|player| player.Team == team).collect::<Vec<Player>>();
+    
+          
+
+
+
+    // for (key, value) in &master_cap_sheet {
+    //     println!("{}: {}", key, value.len());
+    // }
+
+
+
+    // let team = &master_cap_sheet[&team];
+
+    // println!("{}", team[0].Player);
+    return f.clone()
+}
+
 use rusty_money::{Money, Round, iso};
 
 
 // this whole thing should really be in team objects
 // make an hashmap of team objects -> write this to json and read from json
 // all relevant info readily available
-pub fn trade(team1: String, team2: String, players1: Vec<Player>, players2: Vec<Player>) {
-    let master_cap_sheet: HashMap<String, Vec<Player>> = get_cap_dict();
+// this doesnt subtract leaving salary
+use rust_decimal_macros::dec;
+#[tauri::command]
+pub fn trade(team1: String, team2: String, players1: Vec<Player>, players2: Vec<Player>, data: String) -> (bool, String) {
+
+    let cap = Money::from_minor(CAP[1]*100, iso::USD);
+    let master_cap_sheet: HashMap<String, Player> = get_cap_dict(data.clone());
 
 
-    let team_1_books = &master_cap_sheet[&team1];
-    let team_2_books = &master_cap_sheet[&team2];
+
+    //add the filtering
+    // let team_1_books = &master_cap_sheet[&team1];
+    let team_1_books: Vec<Player> = get_team_cap_sheet(team1.clone(), data.clone());
+    // let team_2_books = &master_cap_sheet[&team2];
+    let team_2_books: Vec<Player> = get_team_cap_sheet(team2.clone(), data.clone());
+
+    // println!("books {} {}", team_1_books.len(), team_2_books.len());
 
     // let ind = team_1_books.index_of()
 
     //find the players in master_cap_sheet
     //swap them
 
+    // this would be faster with up to date team objects
+
+    
+
+    let mut players_salary_1 = Money::from_minor(0, iso::USD);
+    for player in players1{
+        if &player.one.len() < &1{
+            continue
+        }
+        players_salary_1 += Money::from_str(&player.one[1..], iso::USD).unwrap()
+    }
+
 
     // THIS NEEDS A LOT OF LOGIC TO UNDERSTAND CORRECT NUMBER
     // NEED TO WORK OUT WHAT NON GUARANTEES THERE ARE
     // find out rules for what counts towards cap
-    let mut salary_1 = Money::from_minor(0, iso::USD);
+    let mut salary_team_1 = Money::from_minor(0, iso::USD);
     for player in team_1_books{
         if &player.one.len() < &1{
             continue
         }
-        salary_1 += Money::from_str(&player.one[1..], iso::USD).unwrap()
+        salary_team_1 += Money::from_str(&player.one[1..], iso::USD).unwrap()
     }
 
-    println!("{} {}", team1, salary_1);
+    // println!("{} {} {} {}", team1, salary_team_1, players_salary_1, cap);
 
-    let mut salary_2 = Money::from_minor(0, iso::USD);
+    let mut players_salary_2 = Money::from_minor(0, iso::USD);
+    for player in players2{
+        if &player.one.len() < &1{
+            continue
+        }
+        players_salary_2 += Money::from_str(&player.one[1..], iso::USD).unwrap()
+    }
+
+    let mut salary_team_2 = Money::from_minor(0, iso::USD);
     for player in team_2_books{
         if &player.one.len() < &1{
             continue
         }
-        salary_2 += Money::from_str(&player.one[1..], iso::USD).unwrap()
+        salary_team_2 += Money::from_str(&player.one[1..], iso::USD).unwrap()
     }
 
-    println!("{} {}", team2, salary_2);
+    println!("{} {} {} {} {}", team2, salary_team_2, players_salary_2, players_salary_1, cap);
+
+    println!("{} {}", *players_salary_1.amount() * dec!(1.25) > *players_salary_2.amount(), *players_salary_2.amount() * dec!(1.25) > *players_salary_1.amount());
+
+
+    if *players_salary_1.amount() * dec!(1.25) >= *players_salary_2.amount() && *players_salary_2.amount() * dec!(1.25) >= *players_salary_1.amount(){
+        return (true, "Salary within 125%".to_string())
+    } else {
+        // here should try all of the other ways to get trades to work
+        if salary_team_1+ players_salary_2 > cap &&  *salary_team_2.amount() + *players_salary_1.amount() > *cap.amount(){
+            // println!("{}  <  {}", *salary_team_1.amount() + *players_salary_2.amount(), *cap.amount());
+            return (false, "Insufficient matching salary. Both teams over cap".to_string())
+        } else if salary_team_2 + players_salary_1 > cap {
+            return (false, "Insufficient matching salary. Team 2 over cap".to_string())
+        }
+    }
+   
 
 
     // let chi: Team = Team {
@@ -183,111 +261,162 @@ pub fn trade(team1: String, team2: String, players1: Vec<Player>, players2: Vec<
         // if true check within 125%
             //reject if not
     
+    // println!("{} {}", salary_team_1.amount + players_salary_2, salary_team_2 + players_salary_1);
+    (true, "room".to_string())
 
 }
 
 
-pub fn main() {
-    let brad: Player = Player {
-        Player: "Bradley Beal".to_string(),
-        Age: 29,
-        zero: "$33,724,200".to_string(),
-        one: "$37,262,300".to_string(),
-        two: "".to_string(),
-        three: "".to_string(),
-        four: "".to_string(),
-        five: "".to_string(),
-        Signed: "".to_string(),
-        Guaranteed: "".to_string(),
-        Team: "Wizards".to_string()
-    };
-    let russ: Player = Player {
-        Player: "Russel Westbrook".to_string(),
-        Age: 29,
-        zero: "$33,724,200".to_string(),
-        one: "$37,262,300".to_string(),
-        two: "".to_string(),
-        three: "".to_string(),
-        four: "".to_string(),
-        five: "".to_string(),
-        Signed: "".to_string(),
-        Guaranteed: "".to_string(),
-        Team: "Lakers".to_string()
-    };
-    let brad2: Player = Player {
-        Player: "Bradley Beal".to_string(),
-        Age: 29,
-        zero: "$33,724,200".to_string(),
-        one: "$37,262,300".to_string(),
-        two: "".to_string(),
-        three: "".to_string(),
-        four: "".to_string(),
-        five: "".to_string(),
-        Signed: "".to_string(),
-        Guaranteed: "".to_string(),
-        Team: "Wizards".to_string()
-    };
-    let russ2: Player = Player {
-        Player: "Russel Westbrook".to_string(),
-        Age: 29,
-        zero: "$33,724,200".to_string(),
-        one: "$37,262,300".to_string(),
-        two: "".to_string(),
-        three: "".to_string(),
-        four: "".to_string(),
-        five: "".to_string(),
-        Signed: "".to_string(),
-        Guaranteed: "".to_string(),
-        Team: "Lakers".to_string()
-    };
-    trade("Wizards".to_string(), "Heat".to_string(), [brad].to_vec(), [russ].to_vec());
-    trade("Bucks".to_string(), "Suns".to_string(), [brad2].to_vec(), [russ2].to_vec())
+fn main() {
+    // tauri::Builder::default()
+    // .invoke_handler(tauri::generate_handler![masterap_sheet])
+    // .run(tauri::generate_context!())
+    // .expect("error while running tauri application");
+
+
+
+    // let brad: Player = Player {
+    //     Player: "Bradley Beal".to_string(),
+    //     Age: 29,
+    //     zero: "$33,724,200".to_string(),
+    //     one: "$37,262,300".to_string(),
+    //     two: "".to_string(),
+    //     three: "".to_string(),
+    //     four: "".to_string(),
+    //     five: "".to_string(),
+    //     Signed: "".to_string(),
+    //     Guaranteed: "".to_string(),
+    //     Team: "Wizards".to_string(),
+    //     Position: "".to_string(),
+    //     EXP: "".to_string(),
+    //     TeamAbbr: "".to_string(),
+    //     Amount: "".to_string(),
+    //     option_type: "".to_string(),
+    //     option_year: "".to_string()
+        
+
+    // };
+    // let russ: Player = Player {
+    //     Player: "Russel Westbrook".to_string(),
+    //     Age: 29,
+    //     zero: "$33,724,200".to_string(),
+    //     one: "$37,262,300".to_string(),
+    //     two: "".to_string(),
+    //     three: "".to_string(),
+    //     four: "".to_string(),
+    //     five: "".to_string(),
+    //     Signed: "".to_string(),
+    //     Guaranteed: "".to_string(),
+    //     Team: "Lakers".to_string(),
+    //     Position: "".to_string(),
+    //     EXP: "".to_string(),
+    //     TeamAbbr: "".to_string(),
+    //     Amount: "".to_string(),
+    //     option_type: "".to_string(),
+    //     option_year: "".to_string()
+    // };
+    // let brad2: Player = Player {
+    //     Player: "Bradley Beal".to_string(),
+    //     Age: 29,
+    //     zero: "$33,724,200".to_string(),
+    //     one: "$37,262,300".to_string(),
+    //     two: "".to_string(),
+    //     three: "".to_string(),
+    //     four: "".to_string(),
+    //     five: "".to_string(),
+    //     Signed: "".to_string(),
+    //     Guaranteed: "".to_string(),
+    //     Team: "Wizards".to_string(),
+    //     Position: "".to_string(),
+    //     EXP: "".to_string(),
+    //     TeamAbbr: "".to_string(),
+    //     Amount: "".to_string(),
+    //     option_type: "".to_string(),
+    //     option_year: "".to_string()
+    // };
+    // let russ2: Player = Player {
+    //     Player: "Russel Westbrook".to_string(),
+    //     Age: 29,
+    //     zero: "$33,724,200".to_string(),
+    //     one: "$37,262,300".to_string(),
+    //     two: "".to_string(),
+    //     three: "".to_string(),
+    //     four: "".to_string(),
+    //     five: "".to_string(),
+    //     Signed: "".to_string(),
+    //     Guaranteed: "".to_string(),
+    //     Team: "Lakers".to_string(),
+    //     Position: "".to_string(),
+    //     EXP: "".to_string(),
+    //     TeamAbbr: "".to_string(),
+    //     Amount: "".to_string(),
+    //     option_type: "".to_string(),
+    //     option_year: "".to_string()
+    // };
+    // trade("Wizards".to_string(), "Heat".to_string(), [brad].to_vec(), [russ].to_vec());
+    // trade("Bucks".to_string(), "Suns".to_string(), [brad2].to_vec(), [russ2].to_vec())
 }
 
 use serde::{Serialize, Deserialize};
 
-pub fn get_cap_dict() -> HashMap<String, Vec<Player>>{
-    println!("{}", 1);
+pub fn get_cap_dict(contract_data: String) -> HashMap<String, Player>{
 
-    let mut contract_data = match read_from_file("cap_sheet.csv") {
-        Ok(data) => data,
-        Err(e) => {
-            eprintln!("{}", e);
-            process::exit(1);
-        }
-    };
+    let caps: HashMap::<String, Player> = serde_json::from_str(&contract_data).unwrap();
+
+    // let caps: any = serde_json::from_str(&contract_data).unwrap();
+
+    // println!("{}", caps);
+
+
+    // let mut contract_data = match read_from_file("master_cap.csv") {
+    //     Ok(data) => data,
+    //     Err(e) => {
+    //         eprintln!("{}", e);
+    //         process::exit(1);
+    //     }
+    // };
     // let mut contract_data: DataSet = read_from_file("contracts.csv");
 
     // hashmap with cap sheet for each team
     let mut master_cap_sheet: HashMap<String, Vec<Player>> = HashMap::new();
+    let mut m: HashMap<String, [Player; 20]> = HashMap::new();
     let mut cur_team: String = "".to_string();
     let mut cur_players: Vec<Player> = Vec::new();
-    for row in contract_data.records.iter(){
-        // println!("{}", row.as_slice())
-        let r: Player = row.deserialize(None).unwrap();
-        // let t = serde_json::from_str(row).unwrap();
+    // for (key, player) in &caps{
+    //     // // println!("{}", row.as_slice())
+    //     // let r: Player = row.deserialize(None).expect("deserialize error");
+   
+    //     println!("{}", player.Team);
+    //     // let t = serde_json::from_str(row).unwrap();
 
-        cur_players.push(r.clone());
-        if cur_team != r.Team {
-            if cur_team == "" {
-                cur_team = r.Team;
-                continue
-            }else {
-                master_cap_sheet.insert(cur_team, cur_players.clone());
-                cur_players.clear();
-                cur_team = r.Team;
-            }
-        }
+    //     m[&player.Team].push(player)
         
-        // use player.team as key for adding to hash
-        // println!("{} {} {}", r.Player, r.one, r.Team);
-    }
+    //     // if cur_team != player.Team {
+    //     //     println!("new team");
+    //     //     if cur_team == "" {
+    //     //         cur_team = player.Team.clone();
+    //     //         continue
+    //     //     } else {
+    //     //         master_cap_sheet.insert(cur_team, cur_players.clone());
+    //     //         cur_players.clear();
+    //     //         cur_team = player.Team.clone();
+    //     //         continue
+    //     //     }
+    //     // }
+
+    //     // cur_players.push(r.clone());
+        
+    //     // use player.team as key for adding to hash
+    //     // println!("{} {} {}", r.Player, r.one, r.Team);
+    // }
 
     // for (i, player_vec) in master_cap_sheet {
     //     println!("{} {} {}", i, player_vec[0].Player, player_vec[0].zero)
     // }
 
-    master_cap_sheet
+
+    caps
+    // master_cap_sheet
 
 
 

@@ -1,4 +1,8 @@
 
+
+// 1. LOAD IT FROM JS
+// 2. I don't fucking know
+// 3. database?
 use std::fs;
 use std::time::Instant;
 use rand::distributions::{Distribution, Uniform};
@@ -145,6 +149,7 @@ fn outcome_from_prob (prob: f32) -> bool {
   return prob > num
 }
 
+// import { readTextFile } from "@tauri-apps/api/fs";
 
 use std::fs::File;
 use priority_queue::PriorityQueue;
@@ -224,6 +229,8 @@ fn damn_should_i_sub(on_court: &[&Player], box_score: &HashMap<String, box_score
 // HashMap<String, box_score_entry>
 
 
+
+
 struct Player_score {
   score: f32
 }
@@ -253,6 +260,7 @@ struct DataSet {
     records: Vec<StringRecord>,
 }
 
+use tauri::api::path;
 
 /// Reads csv data from a file and returns a DataSet
 fn read_from_file(path: &str) -> Result<DataSet, Box<Error>> {
@@ -268,36 +276,58 @@ fn read_from_file(path: &str) -> Result<DataSet, Box<Error>> {
 }
 
 
-#[tauri::command]
-fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec<box_score_entry>){
+pub struct PackageInfo {
+  pub name: String,
+  pub version: String,
+}
 
-  
+use std::env;
+use std::io;
+use std::path::PathBuf;
 
-  cap::main();
-  // playtype_data::gen_data();
-  println!("{}", "COMMAND22".to_string());
-
-
-  
-  // this needs to come from an api I think
-  // maybe write it to a file
-  let data = fs::read_to_string("darko.json").unwrap();
-
-
-  // let time = Duration::from_secs(5);
-  //  sleep(time);
-    // println!("{}", data);
+fn inner_main() -> io::Result<PathBuf> {
+    let mut dir = env::current_exe()?;// big?
+    // dir.pop();
+    // dir.push("Config");
+    // dir.push("test.txt");
+    Ok(dir)
+}
 
 
-  // fs::write("f.json", data).expect("Unable to write file");
+use std::path::Path;
+use resolve_path::PathResolveExt;
 
-    // let iso = read_from_file("master.csv");
-    // for row in &iso {
-    //     println!("{}", row)
-    //     // playtype_dict.insert(row.Player, Vec::new().push(row.rating))
-    // }
+use static_files;
 
 
+
+
+use actix_web::{App, HttpServer};
+use actix_web_static_files::ResourceFiles;
+
+use std::fs::OpenOptions;
+use std::io::prelude::*;
+fn add_task(content: String) {
+  let mut file = OpenOptions::new()
+    .create(true)
+    .append(true)
+    .open("../tasks.txt")
+    .expect("Error while opening the tasks file");
+  writeln!(file, "{}", content).expect("Error while writing in the tasks file");
+}
+
+
+fn run_game(team1: String, team2: String, data: &String) -> (Vec<box_score_entry>, Vec<box_score_entry>){
+
+  // add_task("Hi".to_string());
+  // let paths = fs::read_dir("./").unwrap();
+
+  // for path in paths {
+  //     println!("Name: {}", path.unwrap().path().display());
+  // }
+  // sleep(std::time::Duration::from_secs(5));
+
+  // let data = fs::read_to_string(path).unwrap();
   let d: HashMap<String, Player> = serde_json::from_str(&data).unwrap();
 
   let mut play_freq: HashMap<String, [f32; 4]> = HashMap::new();
@@ -624,12 +654,145 @@ fn my_custom_command(team1: String, team2: String) -> (Vec<box_score_entry>, Vec
   (home_score, away_score)
 }
 
+
+
+// use tauri::{api::path::{BaseDirectory}, Manager};
+
+use tauri::Manager;
+#[tauri::command]
+fn my_custom_command(team1: String, team2: String, data: String) -> (Vec<box_score_entry>, Vec<box_score_entry>){
+  // cap::main();
+  // playtype_data::gen_data();\
+
+
+  println!("{}", data);
+  // let mut m: String = "./darko.json".to_string();
+
+  // let d = tauri::Builder::default().setup(|app: tauri::App| -> Result<String, Error> {
+  //   // println!("{}", app);
+  //   let path = resolve_path(
+  //     &app.config(),
+  //     app.package_info(),
+  //     &app.env(),
+  //     "darko.json",
+  //     Some(BaseDirectory::Resource)
+  //   );
+  //   let data = fs::read_to_string(path.unwrap()).unwrap();
+  //   println!("{}", data);
+  //   m = data;
+  //   // data
+  //   // return run_game(team1, team2, &data);
+  //   // assert_eq!(path.to_str().unwrap(), "/home/${whoami}/.config/path/to/something");
+  //   // Ok(data)
+  //   Ok(data)
+  // });
+
+  // println!("{}", d);
+
+  return run_game(team1, team2, &data);
+  
+
+  // println!("{}", "COMMAND22".to_string());
+
+//   pub struct PackageInfo {
+//     pub name: String,
+//     pub version: String,
+// };
+
+//   let p: PackageInfo = PackageInfo {
+//     name: "app".to_string(),
+//     version: "0.1.0".to_string()
+//   };
+
+
+
+
+  // sleep(Duration(5));
+  
+  // this needs to come from an api I think
+  // maybe write it to a file
+  // println!("{}", tauri::api::path::resource_dir(&p, "MACOS").unwrap().display());
+
+
+  //  let a = "~/darko.json".resolve_in(BaseDirectory::Resource);
+  //  let path = resolve_path("resources/darko.json", Some(BaseDirectory::Config)).expect("failed to resolve path");
+  //  println!("{}", path);
+  // println!("{}", path::resource_dir());
+
+  // sleep(5);
+
+  
+  // let data = readTextFile("darko.json")
+
+  
+
+
+  // let time = Duration::from_secs(5);
+  //  sleep(time);
+    // println!("{}", data);
+
+
+  // fs::write("f.json", data).expect("Unable to write file");
+
+    // let iso = read_from_file("master.csv");
+    // for row in &iso {
+    //     println!("{}", row)
+    //     // playtype_dict.insert(row.Player, Vec::new().push(row.rating))
+    // }
+
+
+  
+}
+
+include!(concat!(env!("OUT_DIR"), "/generated.rs"));
+
+use tauri::{api::path::{BaseDirectory, resolve_path}, Env};
+// async fn main() -> std::io::Result<()> {
+
+// }
+// #[actix_web::main]
 fn main() {
+
+  
+  let generated = generate();
+
+  // for (a, b) in generated.iter(){
+  //   println!("yuyuyu {}", a);
+  //   let data = fs::read_to_string(a).unwrap();
+  //   println!("{}", data)
+  // }
+
+  let context = tauri::generate_context!();
+  let path = resolve_path(
+    context.config(),
+    context.package_info(),
+    &Env::default(),
+    "darko.json",
+    Some(BaseDirectory::Resource))
+  .expect("failed to resolve path");
+
+  println!("{}", path.display());
+
+  let data = fs::read_to_string(path).unwrap();
+
+  // println!("{}", data);
+
+
+  // println!("{}", generated);
   tauri::Builder::default()
-    .invoke_handler(tauri::generate_handler![my_custom_command])
-    .run(tauri::generate_context!())
+    .invoke_handler(tauri::generate_handler![my_custom_command, cap::get_team_cap_sheet, cap::trade])
+    .run(context)
     .expect("error while running tauri application");
 
+
+
+  //   HttpServer::new(move || {
+  //     let generated = generate();
+  //     App::new().service(ResourceFiles::new("/", generated))
+  // })
+  // .bind("127.0.0.1:8080")?
+  // .run()
+  // .await
 }
 
 use std::collections::HashMap;

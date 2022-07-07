@@ -12,10 +12,12 @@
   },
   "tauri": {
     "allowlist": {
+      "path": {
+        "all": true
+      },
       "all": true,
       "fs": {
-        "readFile": true,
-        "writeFile": true,
+        "all": true,
         "scope": ["*"]
     }
     },
@@ -43,7 +45,7 @@
         "providerShortName": null,
         "signingIdentity": null
       },
-      "resources": ["./darko.json"],
+      "resources": ["./darko.json", "darko.json", "master_cap.json"],
       "shortDescription": "",
       "targets": "all",
       "windows": {
